@@ -1,4 +1,4 @@
-package buabap.data.datasource.local
+package mx.android.buabap.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

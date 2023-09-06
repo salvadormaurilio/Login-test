@@ -1,4 +1,4 @@
-package buabap.ui
+package mx.android.buabap.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

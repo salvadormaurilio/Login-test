@@ -1,4 +1,4 @@
-package buabap
+package mx.android.buabap
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

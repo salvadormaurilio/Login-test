@@ -1,4 +1,4 @@
-package buabap.data.datasource.local
+package mx.android.buabap.local
 
 import android.content.Context
 import androidx.room.Database
