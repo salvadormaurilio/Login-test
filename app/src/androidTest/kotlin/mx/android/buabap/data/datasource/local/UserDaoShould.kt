@@ -1,12 +1,13 @@
-package mx.android.buabap.datasource.local
+package mx.android.buabap.data.datasource.local
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import mx.android.buabap.core.RoomRule
 import mx.android.buabap.core.assertIsNull
 import mx.android.buabap.core.assertThatEquals
+import mx.android.buabap.data.datasource.database.UserDao
+import mx.android.buabap.data.datasource.database.UserRoomDatabase
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
