@@ -1,0 +1,31 @@
+[versions]
+
+android-gradle-plugin-v = "7.4.2"
+kotlin-v = "1.8.22"
+
+core-ktx-v = "1.10.1"
+appcompat-ktx-v = "1.6.1"
+material-v = "1.9.0"
+constraint-layout-v = "2.1.4"
+junit-v = "4.13.2"
+ext-junit-v = "1.1.5"
+espresso-core-v = "3.5.1"
+gson-v = "2.10.1"
+
+
+[plugins]
+
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin-v" }
+android-library = { id = "com.android.library", version.ref = "android-gradle-plugin-v" }
+android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-v" }
+
+[libraries]
+
+androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx-v" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat-ktx-v" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material-v" }
+constraint-layout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraint-layout-v" }
+junit = { group = "junit", name = "junit", version.ref = "junit-v" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "ext-junit-v" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core-v" }
+
