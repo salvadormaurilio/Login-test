@@ -2,6 +2,7 @@
 
 android-gradle-plugin-v = "7.4.2"
 kotlin-v = "1.8.22"
+dagger-hilt-v  = "2.48"
 
 core-ktx-v = "1.10.1"
 appcompat-ktx-v = "1.6.1"
@@ -19,6 +20,7 @@ espresso-core-v = "3.5.1"
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin-v" }
 android-library = { id = "com.android.library", version.ref = "android-gradle-plugin-v" }
 android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-v" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt-v" }
 
 [libraries]
 
@@ -30,6 +32,9 @@ constraint-layout = { group = "androidx.constraintlayout", name = "constraintlay
 room-rutime = { group = "androidx.room", name = "room-runtime", version.ref = "room-v" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room-v" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room-v" }
+
+dagger_hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger-hilt-v" }
+dagger_hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger-hilt-v" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit-v" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "ext-junit-v" }
