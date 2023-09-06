@@ -33,6 +33,15 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    sourceSets.forEach {
+        it.java.srcDirs("src/$it.name/kotlin")
+    }
+
+    @Suppress("UnstableApiUsage")
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
