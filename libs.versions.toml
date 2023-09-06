@@ -7,10 +7,11 @@ core-ktx-v = "1.10.1"
 appcompat-ktx-v = "1.6.1"
 material-v = "1.9.0"
 constraint-layout-v = "2.1.4"
+room-v = "2.5.2"
+
 junit-v = "4.13.2"
 ext-junit-v = "1.1.5"
 espresso-core-v = "3.5.1"
-gson-v = "2.10.1"
 
 
 [plugins]
@@ -25,6 +26,11 @@ androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "cor
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat-ktx-v" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material-v" }
 constraint-layout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraint-layout-v" }
+
+room-rutime = { group = "androidx.room", name = "room-runtime", version.ref = "room-v" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room-v" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room-v" }
+
 junit = { group = "junit", name = "junit", version.ref = "junit-v" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "ext-junit-v" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core-v" }
