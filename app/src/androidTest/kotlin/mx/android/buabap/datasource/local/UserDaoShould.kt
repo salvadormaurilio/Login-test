@@ -2,9 +2,14 @@ package mx.android.buabap.datasource.local
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import mx.android.buabap.datasource.local.core.RoomRule
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
+import mx.android.buabap.core.RoomRule
+import mx.android.buabap.core.assertIsNull
+import mx.android.buabap.core.assertThatEquals
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -21,5 +26,34 @@ class UserDaoShould {
     @Before
     fun setUp() {
         userDao = userRoomDatabase.database().userDao()
+    }
+
+    @Test
+    fun insertUserEntityInUserDao() = runTest {
+        val userEntity = givenUserEntity()
+
+        val row = userDao.insert(userEntity)
+
+        assertThatEquals(row, ANY_AUTO_ID)
+    }
+
+    @Test
+    fun geeUserEntityFromUserDaoWhenCredentialsAreValid() = runTest {
+        val userEntity = givenUserEntity()
+
+        userDao.insert(userEntity)
+        val userEntityResult = userDao.get(ANY_USER_EMAIL, ANY_PASSWORD)
+
+        assertThatEquals(userEntityResult, userEntity)
+    }
+
+    @Test
+    fun geeUserEntityFromUserDaoWhenCredentialsAreInvalid() = runTest {
+        val userEntity = givenUserEntity()
+
+        userDao.insert(userEntity)
+        val userEntityResult = userDao.get(ANY_USER_EMAIL, ANY_INVALID_PASSWORD)
+
+        assertIsNull(userEntityResult)
     }
 }
