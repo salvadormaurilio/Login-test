@@ -14,6 +14,7 @@ kotlinx-coroutines-v = "1.7.3"
 
 junit-v = "4.13.2"
 ext-junit-v = "1.1.5"
+mockito-kotlin-v = "5.1.0"
 espresso-core-v = "3.5.1"
 core-testing_v = "2.2.0"
 
@@ -43,6 +44,7 @@ kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 
 junit = { group = "junit", name = "junit", version.ref = "junit-v" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "ext-junit-v" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito-kotlin-v" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core-v" }
 core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "core-testing_v" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-v" }

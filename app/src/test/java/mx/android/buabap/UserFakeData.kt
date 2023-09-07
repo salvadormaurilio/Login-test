@@ -13,3 +13,5 @@ fun givenUserEntity() = UserEntity(
     email = ANY_USER_EMAIL,
     password = ANY_PASSWORD
 )
+
+
