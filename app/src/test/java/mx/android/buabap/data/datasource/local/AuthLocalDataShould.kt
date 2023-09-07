@@ -2,9 +2,13 @@ package mx.android.buabap.data.datasource.local
 
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
-import mx.android.buabap.ANY_AUTO_ID
+import mx.android.buabap.ANY_ID
+import mx.android.buabap.ANY_INVALID_ID
+import mx.android.buabap.ANY_PASSWORD
+import mx.android.buabap.ANY_USER_EMAIL
 import mx.android.buabap.core.assertThatEquals
 import mx.android.buabap.core.assertThatIsInstanceOf
+import mx.android.buabap.data.datasource.exception.SignInException
 import mx.android.buabap.data.datasource.exception.SignUpException
 import mx.android.buabap.data.datasource.local.database.UserDao
 import mx.android.buabap.givenUserEntity
@@ -26,9 +30,9 @@ class AuthLocalDataShould {
     }
 
     @Test
-    fun `Get success when signUp is called and insert is success`() = runTest {
+    fun `Get success when signUp is called and insert UserEntity is success`() = runTest {
         val userEntity = givenUserEntity()
-        whenever(userDao.insert(userEntity)).thenReturn(ANY_AUTO_ID)
+        whenever(userDao.insert(userEntity)).thenReturn(ANY_ID)
 
         val result = authLocalDataSource.signUp(userEntity).first()
 
@@ -37,13 +41,34 @@ class AuthLocalDataShould {
     }
 
     @Test
-    fun `Get SignUpException when signUp is called and insert is failure`() = runTest {
+    fun `Get SignUpException when signUp is called and insert UserEntity is failure`() = runTest {
         val userEntity = givenUserEntity()
-        whenever(userDao.insert(userEntity)).thenReturn(-1L)
+        whenever(userDao.insert(userEntity)).thenReturn(ANY_INVALID_ID)
 
         val result = authLocalDataSource.signUp(userEntity).first()
 
         verify(userDao).insert(userEntity)
         assertThatIsInstanceOf<SignUpException>(result.exceptionOrNull())
+    }
+
+    @Test
+    fun `Get success when signUp is called and get UserEntity is success`() = runTest {
+        val userEntity = givenUserEntity()
+        whenever(userDao.get(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(userEntity)
+
+        val result = authLocalDataSource.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
+
+        verify(userDao).get(ANY_USER_EMAIL, ANY_PASSWORD)
+        assertThatEquals(result.getOrNull(), userEntity)
+    }
+
+    @Test
+    fun `Get SignInException when signIn is called and get UserEntity is null`() = runTest {
+        whenever(userDao.get(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(null)
+
+        val result = authLocalDataSource.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
+
+        verify(userDao).get(ANY_USER_EMAIL, ANY_PASSWORD)
+        assertThatIsInstanceOf<SignInException>(result.exceptionOrNull())
     }
 }
