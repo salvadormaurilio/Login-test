@@ -46,7 +46,7 @@ class AuthRepositoryShould {
     }
 
     @Test
-    fun `Get SignUpException when signUp is called and insert UserEntity is failure`() = runTest {
+    fun `Get SignUpException when signUp is called and signUp authLocalDataSource  is failure`() = runTest {
         val userEntity = givenUserEntity()
         val userCredentials = givenUserCredentials()
         val resultSignUpException: Result<Boolean> = Result.failure(SignUpException())
@@ -84,6 +84,4 @@ class AuthRepositoryShould {
          verify(authLocalDataSource).signIn(ANY_USER_EMAIL, ANY_PASSWORD)
          assertThatIsInstanceOf<SignInException>(result.exceptionOrNull())
      }
-
-
 }
