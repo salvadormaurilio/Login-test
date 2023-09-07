@@ -32,6 +32,7 @@ class AuthLocalDataShould {
     @Test
     fun `Get success when signUp is called and insert UserEntity is success`() = runTest {
         val userEntity = givenUserEntity()
+
         whenever(userDao.insert(userEntity)).thenReturn(ANY_ID)
 
         val result = authLocalDataSource.signUp(userEntity).first()
@@ -43,6 +44,7 @@ class AuthLocalDataShould {
     @Test
     fun `Get SignUpException when signUp is called and insert UserEntity is failure`() = runTest {
         val userEntity = givenUserEntity()
+
         whenever(userDao.insert(userEntity)).thenReturn(ANY_INVALID_ID)
 
         val result = authLocalDataSource.signUp(userEntity).first()
@@ -52,8 +54,9 @@ class AuthLocalDataShould {
     }
 
     @Test
-    fun `Get success when signUp is called and get UserEntity is success`() = runTest {
+    fun `Get success when signIn is called and get UserEntity is success`() = runTest {
         val userEntity = givenUserEntity()
+
         whenever(userDao.get(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(userEntity)
 
         val result = authLocalDataSource.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
