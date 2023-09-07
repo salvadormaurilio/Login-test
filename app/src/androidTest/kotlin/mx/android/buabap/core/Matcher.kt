@@ -6,6 +6,7 @@ import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
 
 inline fun <reified T> classType(): Class<T> = T::class.java
+
 inline fun <reified T> assertThatIsInstanceOf(actual: Any?) = assertThat(
     actual, instanceOf(
         classType<T>()
