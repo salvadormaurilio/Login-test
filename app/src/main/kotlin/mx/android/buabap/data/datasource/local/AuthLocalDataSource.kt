@@ -2,8 +2,8 @@ package mx.android.buabap.data.datasource.local
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import mx.android.buabap.data.datasource.database.UserDao
-import mx.android.buabap.data.datasource.database.UserEntity
+import mx.android.buabap.data.datasource.local.database.UserDao
+import mx.android.buabap.data.datasource.local.database.UserEntity
 import mx.android.buabap.data.datasource.exception.SignInException
 import mx.android.buabap.data.datasource.exception.SignUpException
 

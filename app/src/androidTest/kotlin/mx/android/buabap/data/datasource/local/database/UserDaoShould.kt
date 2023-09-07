@@ -1,4 +1,4 @@
-package mx.android.buabap.data.datasource.local
+package mx.android.buabap.data.datasource.local.database
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -6,8 +6,11 @@ import kotlinx.coroutines.test.runTest
 import mx.android.buabap.core.RoomRule
 import mx.android.buabap.core.assertIsNull
 import mx.android.buabap.core.assertThatEquals
-import mx.android.buabap.data.datasource.database.UserDao
-import mx.android.buabap.data.datasource.database.UserRoomDatabase
+import mx.android.buabap.data.datasource.local.ANY_AUTO_ID
+import mx.android.buabap.data.datasource.local.ANY_INVALID_PASSWORD
+import mx.android.buabap.data.datasource.local.ANY_PASSWORD
+import mx.android.buabap.data.datasource.local.ANY_USER_EMAIL
+import mx.android.buabap.data.datasource.local.givenUserEntity
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

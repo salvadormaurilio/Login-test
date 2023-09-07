@@ -1,7 +1,7 @@
 package mx.android.buabap.data
 
 import kotlinx.coroutines.flow.map
-import mx.android.buabap.data.datasource.database.toResultUserData
+import mx.android.buabap.data.datasource.local.database.toResultUserData
 import mx.android.buabap.data.datasource.local.AuthLocalDataSource
 import mx.android.buabap.domain.UserCredentials
 import mx.android.buabap.domain.toUserEntity

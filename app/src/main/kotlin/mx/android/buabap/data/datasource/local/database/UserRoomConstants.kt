@@ -1,4 +1,4 @@
-package mx.android.buabap.data.datasource.database
+package mx.android.buabap.data.datasource.local.database
 
 const val DATABASE_USER_NAME = "user.db"
 const val DATABASE_USER_VERSION = 1

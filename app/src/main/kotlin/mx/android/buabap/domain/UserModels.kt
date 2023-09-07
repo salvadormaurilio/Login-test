@@ -1,6 +1,6 @@
 package mx.android.buabap.domain
 
-import mx.android.buabap.data.datasource.database.UserEntity
+import mx.android.buabap.data.datasource.local.database.UserEntity
 
 data class UserCredentials(val name: String, val email: String, val password: String)
 
