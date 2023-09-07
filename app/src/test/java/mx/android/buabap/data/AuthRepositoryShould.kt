@@ -3,8 +3,6 @@ package mx.android.buabap.data
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
-import mx.android.buabap.ANY_ID
-import mx.android.buabap.ANY_INVALID_ID
 import mx.android.buabap.ANY_PASSWORD
 import mx.android.buabap.ANY_USER_EMAIL
 import mx.android.buabap.core.assertThatEquals
@@ -12,9 +10,7 @@ import mx.android.buabap.core.assertThatIsInstanceOf
 import mx.android.buabap.data.datasource.exception.SignInException
 import mx.android.buabap.data.datasource.exception.SignUpException
 import mx.android.buabap.data.datasource.local.AuthLocalDataSource
-import mx.android.buabap.data.datasource.local.database.UserDao
 import mx.android.buabap.data.datasource.local.database.UserEntity
-import mx.android.buabap.domain.toUserEntity
 import mx.android.buabap.givenUserCredentials
 import mx.android.buabap.givenUserData
 import mx.android.buabap.givenUserEntity
