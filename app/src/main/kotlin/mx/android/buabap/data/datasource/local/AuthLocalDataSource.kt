@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import mx.android.buabap.data.datasource.database.UserDao
 import mx.android.buabap.data.datasource.database.UserEntity
+import mx.android.buabap.data.datasource.exception.SignInException
 import mx.android.buabap.data.datasource.exception.SignUpException
 
 class AuthLocalDataSource(private val userDao: UserDao) {
@@ -15,7 +16,7 @@ class AuthLocalDataSource(private val userDao: UserDao) {
 
     fun signIn(email: String, password: String): Flow<Result<UserEntity>> = flow {
         val userEntity = userDao.get(email, password)
-        if (userEntity != null) emit(Result.success(userEntity)) else emit(Result.failure(SignUpException()))
+        if (userEntity != null) emit(Result.success(userEntity)) else emit(Result.failure(SignInException()))
     }
 
     companion object {
