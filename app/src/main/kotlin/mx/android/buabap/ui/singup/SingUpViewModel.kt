@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SingUpViewModel @Inject constructor(
-    privateλ val authExceptionHandler: AuthExceptionHandler,
+    private val authExceptionHandler: AuthExceptionHandler,
     private val signUpUseCase: SignUpUseCase
 ) : ViewModel() {
 
@@ -26,7 +26,8 @@ class SingUpViewModel @Inject constructor(
     fun singUp(userCredentialsUi: UserCredentialsUi) = viewModelScope.launch {
         _signUpUiState.value = SignUpUiState.Loading
 
-
+        val (areInvalidCredentials, exception) = authExceptionHandler.areInvalidSingUpCredentials(userCredentialsUi)
+        if (areInvalidCredentials) return@launch emitSignInUiState(SignUpUiState.Error(exception))
 
         signUpUseCase.signUp(userCredentialsUi.toUserCredentials()).collect {
             signUpSuccess(it)
@@ -35,11 +36,15 @@ class SingUpViewModel @Inject constructor(
     }
 
     private fun signUpSuccess(result: Result<Boolean>) = result.onSuccess {
-        _signUpUiState.value = SignUpUiState.Success
+        emitSignInUiState(SignUpUiState.Success)
     }
 
     private fun signUpError(result: Result<Boolean>) = result.onFailure {
         it.printStackTrace()
-        _signUpUiState.value = SignUpUiState.Error(it)
+        emitSignInUiState(SignUpUiState.Error(it))
+    }
+
+    private fun emitSignInUiState(signUpUiState: SignUpUiState) {
+        _signUpUiState.value = signUpUiState
     }
 }
