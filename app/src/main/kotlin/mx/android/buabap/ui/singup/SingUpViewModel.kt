@@ -7,12 +7,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mx.android.buabap.domain.SignUpUseCase
+import mx.android.buabap.ui.exception.AuthExceptionHandler
 import mx.android.buabap.ui.singin.UserCredentialsUi
 import mx.android.buabap.ui.singin.toUserCredentials
 import javax.inject.Inject
 
 @HiltViewModel
-class SingUpViewModel @Inject constructor(private val signUpUseCase: SignUpUseCase) : ViewModel() {
+class SingUpViewModel @Inject constructor(
+    privateλ val authExceptionHandler: AuthExceptionHandler,
+    private val signUpUseCase: SignUpUseCase
+) : ViewModel() {
 
     private val _signUpUiState = MutableStateFlow<SignUpUiState?>(null)
 
@@ -21,6 +25,9 @@ class SingUpViewModel @Inject constructor(private val signUpUseCase: SignUpUseCa
 
     fun singUp(userCredentialsUi: UserCredentialsUi) = viewModelScope.launch {
         _signUpUiState.value = SignUpUiState.Loading
+
+
+
         signUpUseCase.signUp(userCredentialsUi.toUserCredentials()).collect {
             signUpSuccess(it)
             signUpError(it)
