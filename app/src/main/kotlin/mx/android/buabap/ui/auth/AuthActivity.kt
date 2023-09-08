@@ -1,4 +1,4 @@
-package mx.android.buabap.ui
+package mx.android.buabap.ui.auth
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -10,8 +10,8 @@ import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import mx.android.buabap.databinding.ActivityAuthBinding
-import mx.android.buabap.ui.AuthAction.SignIn
-import mx.android.buabap.ui.AuthAction.SignUp
+import mx.android.buabap.ui.auth.AuthAction.SignIn
+import mx.android.buabap.ui.auth.AuthAction.SignUp
 
 class AuthActivity : AppCompatActivity() {
 

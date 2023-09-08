@@ -1,8 +1,8 @@
-package mx.android.buabap.ui
+package mx.android.buabap.ui.auth
 
 import mx.android.buabap.core.assertThatEquals
-import mx.android.buabap.ui.AuthAction.SignIn
-import mx.android.buabap.ui.AuthAction.SignUp
+import mx.android.buabap.ui.auth.AuthAction.SignIn
+import mx.android.buabap.ui.auth.AuthAction.SignUp
 import org.junit.Before
 import org.junit.Test
 

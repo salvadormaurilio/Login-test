@@ -1,4 +1,4 @@
-package mx.android.buabap.ui
+package mx.android.buabap.ui.auth
 
 sealed class AuthAction {
     object SignUp : AuthAction()
