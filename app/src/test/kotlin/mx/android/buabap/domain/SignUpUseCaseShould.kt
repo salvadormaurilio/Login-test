@@ -6,7 +6,7 @@ import kotlinx.coroutines.test.runTest
 import mx.android.buabap.core.assertThatEquals
 import mx.android.buabap.core.assertThatIsInstanceOf
 import mx.android.buabap.data.AuthRepository
-import mx.android.buabap.data.datasource.exception.SignUpException
+import mx.android.buabap.data.datasource.exception.AuthException
 import mx.android.buabap.givenUserCredentials
 import org.junit.Before
 import org.junit.Test
@@ -41,13 +41,13 @@ class SignUpUseCaseShould {
     @Test
     fun `Get SignUpException when signUp is called and signUp authRepository is failure`() = runTest {
         val userCredentials = givenUserCredentials()
-        val resultSignUpException: Result<Boolean> = Result.failure(SignUpException())
+        val resultSignUpException: Result<Boolean> = Result.failure(AuthException.SignUpException())
 
         whenever(authRepository.signUp(userCredentials)).thenReturn(flowOf(resultSignUpException))
 
         val result = authRepository.signUp(userCredentials).first()
 
         verify(authRepository).signUp(userCredentials)
-        assertThatIsInstanceOf<SignUpException>(result.exceptionOrNull())
+        assertThatIsInstanceOf<AuthException.SignUpException>(result.exceptionOrNull())
     }
 }

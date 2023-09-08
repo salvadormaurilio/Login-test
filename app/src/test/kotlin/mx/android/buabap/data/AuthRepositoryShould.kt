@@ -7,8 +7,7 @@ import mx.android.buabap.ANY_PASSWORD
 import mx.android.buabap.ANY_USER_EMAIL
 import mx.android.buabap.core.assertThatEquals
 import mx.android.buabap.core.assertThatIsInstanceOf
-import mx.android.buabap.data.datasource.exception.SignInException
-import mx.android.buabap.data.datasource.exception.SignUpException
+import mx.android.buabap.data.datasource.exception.AuthException
 import mx.android.buabap.data.datasource.local.AuthLocalDataSource
 import mx.android.buabap.data.datasource.local.database.UserEntity
 import mx.android.buabap.givenUserCredentials
@@ -49,14 +48,14 @@ class AuthRepositoryShould {
     fun `Get SignUpException when signUp is called and signUp authLocalDataSource  is failure`() = runTest {
         val userEntity = givenUserEntity()
         val userCredentials = givenUserCredentials()
-        val resultSignUpException: Result<Boolean> = Result.failure(SignUpException())
+        val resultSignUpException: Result<Boolean> = Result.failure(AuthException.SignUpException())
 
         whenever(authLocalDataSource.signUp(userEntity)).thenReturn(flowOf(resultSignUpException))
 
         val result = authRepository.signUp(userCredentials).first()
 
         verify(authLocalDataSource).signUp(userEntity)
-        assertThatIsInstanceOf<SignUpException>(result.exceptionOrNull())
+        assertThatIsInstanceOf<AuthException.SignUpException>(result.exceptionOrNull())
     }
 
     @Test
@@ -73,15 +72,15 @@ class AuthRepositoryShould {
         assertThatEquals(result.getOrNull(), userData)
     }
 
-     @Test
-     fun `Get SignInException when signIn is called and signIn authLocalDataSource is failure`() = runTest {
-         val resultSignInException: Result<UserEntity> = Result.failure(SignInException())
+    @Test
+    fun `Get SignInException when signIn is called and signIn authLocalDataSource is failure`() = runTest {
+        val resultSignInException: Result<UserEntity> = Result.failure(AuthException.SignInException())
 
-         whenever(authLocalDataSource.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultSignInException))
+        whenever(authLocalDataSource.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultSignInException))
 
-         val result = authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
+        val result = authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
 
-         verify(authLocalDataSource).signIn(ANY_USER_EMAIL, ANY_PASSWORD)
-         assertThatIsInstanceOf<SignInException>(result.exceptionOrNull())
-     }
+        verify(authLocalDataSource).signIn(ANY_USER_EMAIL, ANY_PASSWORD)
+        assertThatIsInstanceOf<AuthException.SignInException>(result.exceptionOrNull())
+    }
 }

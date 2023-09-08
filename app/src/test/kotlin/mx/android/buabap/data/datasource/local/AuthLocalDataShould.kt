@@ -8,8 +8,7 @@ import mx.android.buabap.ANY_PASSWORD
 import mx.android.buabap.ANY_USER_EMAIL
 import mx.android.buabap.core.assertThatEquals
 import mx.android.buabap.core.assertThatIsInstanceOf
-import mx.android.buabap.data.datasource.exception.SignInException
-import mx.android.buabap.data.datasource.exception.SignUpException
+import mx.android.buabap.data.datasource.exception.AuthException
 import mx.android.buabap.data.datasource.local.database.UserDao
 import mx.android.buabap.givenUserEntity
 import org.junit.Before
@@ -50,7 +49,7 @@ class AuthLocalDataShould {
         val result = authLocalDataSource.signUp(userEntity).first()
 
         verify(userDao).insert(userEntity)
-        assertThatIsInstanceOf<SignUpException>(result.exceptionOrNull())
+        assertThatIsInstanceOf<AuthException.SignUpException>(result.exceptionOrNull())
     }
 
     @Test
@@ -72,6 +71,6 @@ class AuthLocalDataShould {
         val result = authLocalDataSource.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
 
         verify(userDao).get(ANY_USER_EMAIL, ANY_PASSWORD)
-        assertThatIsInstanceOf<SignInException>(result.exceptionOrNull())
+        assertThatIsInstanceOf<AuthException.SignInException>(result.exceptionOrNull())
     }
 }

@@ -9,7 +9,7 @@ import mx.android.buabap.ANY_USER_EMAIL
 import mx.android.buabap.core.TestDispatcherRule
 import mx.android.buabap.core.assertThatEquals
 import mx.android.buabap.core.assertThatIsInstanceOf
-import mx.android.buabap.data.datasource.exception.SignInException
+import mx.android.buabap.data.datasource.exception.AuthException
 import mx.android.buabap.domain.SignInUseCase
 import mx.android.buabap.domain.UserData
 import mx.android.buabap.givenUserData
@@ -29,7 +29,6 @@ class SingInViewModelShould {
     var testDispatcherRule = TestDispatcherRule()
 
     private val authExceptionHandler = AuthExceptionHandler()
-
     private val signInUseCase = Mockito.mock<SignInUseCase>()
 
     private lateinit var singInViewModel: SingInViewModel
@@ -54,6 +53,7 @@ class SingInViewModelShould {
     fun `Test 2`() = runTest {
         val userData = givenUserData()
         val resultUserData = Result.success(userData)
+
         whenever(signInUseCase.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultUserData))
 
         singInViewModel.signIn(ANY_USER_EMAIL, ANY_PASSWORD)
@@ -67,7 +67,7 @@ class SingInViewModelShould {
 
     @Test
     fun `Test 3`() = runTest {
-        val resultSignInException: Result<UserData> = Result.failure(SignInException())
+        val resultSignInException: Result<UserData> = Result.failure(AuthException.SignInException())
 
         whenever(signInUseCase.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultSignInException))
 
@@ -77,6 +77,6 @@ class SingInViewModelShould {
 
         verify(signInUseCase).signIn(ANY_USER_EMAIL, ANY_PASSWORD)
         assertThatIsInstanceOf<SignInUiState.Error>(result)
-        assertThatIsInstanceOf<SignInException>((result as SignInUiState.Error).error)
+        assertThatIsInstanceOf<AuthException.SignInException>((result as SignInUiState.Error).error)
     }
 }

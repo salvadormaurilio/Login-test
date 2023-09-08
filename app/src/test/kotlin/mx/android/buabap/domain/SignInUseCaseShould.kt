@@ -8,7 +8,7 @@ import mx.android.buabap.ANY_USER_EMAIL
 import mx.android.buabap.core.assertThatEquals
 import mx.android.buabap.core.assertThatIsInstanceOf
 import mx.android.buabap.data.AuthRepository
-import mx.android.buabap.data.datasource.exception.SignInException
+import mx.android.buabap.data.datasource.exception.AuthException
 import mx.android.buabap.givenUserData
 import org.junit.Before
 import org.junit.Test
@@ -42,13 +42,13 @@ class SignInUseCaseShould {
 
     @Test
     fun `Get SignInException when signIn is called and signIn authRepository is failure`() = runTest {
-        val resultSignInException: Result<UserData> = Result.failure(SignInException())
+        val resultSignInException: Result<UserData> = Result.failure(AuthException.SignInException())
 
         whenever(authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultSignInException))
 
         val result = signInUseCase.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
 
         verify(authRepository).signIn(ANY_USER_EMAIL, ANY_PASSWORD)
-        assertThatIsInstanceOf<SignInException>(result.exceptionOrNull())
+        assertThatIsInstanceOf<AuthException.SignInException>(result.exceptionOrNull())
     }
 }
