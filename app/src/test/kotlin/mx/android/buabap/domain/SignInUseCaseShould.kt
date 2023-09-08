@@ -9,11 +9,7 @@ import mx.android.buabap.core.assertThatEquals
 import mx.android.buabap.core.assertThatIsInstanceOf
 import mx.android.buabap.data.AuthRepository
 import mx.android.buabap.data.datasource.exception.SignInException
-import mx.android.buabap.data.datasource.exception.SignUpException
-import mx.android.buabap.data.datasource.local.database.UserEntity
-import mx.android.buabap.givenUserCredentials
 import mx.android.buabap.givenUserData
-import mx.android.buabap.givenUserEntity
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
