@@ -22,7 +22,7 @@ class SingInViewModel @Inject constructor(private val signInUseCase: SignInUseCa
 
         signInUseCase.signIn(email, password).collect { it ->
             it.onSuccess {
-                _signInUiState.value = SignInUiState.Success
+                _signInUiState.value = SignInUiState.Success(it)
             }
             it.onFailure {
                 it.printStackTrace()
