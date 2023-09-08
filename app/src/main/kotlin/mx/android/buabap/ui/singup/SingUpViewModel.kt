@@ -9,6 +9,8 @@ import kotlinx.coroutines.launch
 import mx.android.buabap.domain.SignUpUseCase
 import mx.android.buabap.ui.singin.UserCredentialsUi
 import mx.android.buabap.ui.singin.toUserCredentials
+import mx.android.buabap.ui.singup.SignUpUiState.Error
+import mx.android.buabap.ui.singup.SignUpUiState.Success
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,15 +24,18 @@ class SingUpViewModel @Inject constructor(private val signUpUseCase: SignUpUseCa
 
     fun singUp(userCredentialsUi: UserCredentialsUi) = viewModelScope.launch {
         _signUpUiState.value = SignUpUiState.Loading
-
-        signUpUseCase.signUp(userCredentialsUi.toUserCredentials()).collect { it ->
-            it.onSuccess {
-                _signUpUiState.value = SignUpUiState.Success
-            }
-            it.onFailure {
-                it.printStackTrace()
-                _signUpUiState.value = SignUpUiState.Error(it)
-            }
+        signUpUseCase.signUp(userCredentialsUi.toUserCredentials()).collect {
+            signUpSuccess(it)
+            signUpError(it)
         }
+    }
+
+    private fun signUpSuccess(result: Result<Boolean>) = result.onSuccess {
+        _signUpUiState.value = Success
+    }
+
+    private fun signUpError(it: Result<Boolean>) = it.onFailure {
+        it.printStackTrace()
+        _signUpUiState.value = Error(it)
     }
 }

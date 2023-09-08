@@ -3,4 +3,6 @@
     <color name="my_light_primary">#518FD0</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green_snack_bar_success">#33856d</color>
+    <color name="red_snack_bar_error">#df606e</color>
 </resources>
