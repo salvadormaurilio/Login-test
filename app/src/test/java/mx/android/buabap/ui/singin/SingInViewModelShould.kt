@@ -1,7 +1,6 @@
 package mx.android.buabap.ui.singin
 
 import mx.android.buabap.core.TestDispatcherRule
-import mx.android.buabap.data.AuthRepository
 import mx.android.buabap.domain.SignInUseCase
 import org.junit.Before
 import org.junit.Rule
@@ -18,6 +17,5 @@ class SingInViewModelShould {
 
     @Before
     fun setup() {
-        singInViewModel = SingInViewModel(signUpUseCase)
     }
 }

@@ -1,10 +1,10 @@
 package mx.android.buabap.ui.exception
 
-sealed class SignInException : Exception() {
-    object Name : SignInException()
-    object Email : SignInException()
-    object Password : SignInException()
-    object ConfirmPassword : SignInException()
-    object DifferentPassword : SignInException()
-    object NoValidationNeeded : SignInException()
+sealed class AuthUiException : Exception() {
+    object Name : AuthUiException()
+    object Email : AuthUiException()
+    object Password : AuthUiException()
+    object ConfirmPassword : AuthUiException()
+    object DifferentPassword : AuthUiException()
+    object NoValidationNeeded : AuthUiException()
 }
