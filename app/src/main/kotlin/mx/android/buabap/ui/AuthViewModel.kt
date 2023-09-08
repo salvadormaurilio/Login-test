@@ -3,8 +3,8 @@ package mx.android.buabap.ui
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import mx.android.buabap.ui.AuthAction.OpenSignIn
-import mx.android.buabap.ui.AuthAction.OpenSignUp
+import mx.android.buabap.ui.AuthAction.SignIn
+import mx.android.buabap.ui.AuthAction.SignUp
 
 class AuthViewModel : ViewModel() {
 
@@ -14,10 +14,10 @@ class AuthViewModel : ViewModel() {
         get() = _navigateToAuthAction
 
     fun navigateToSingUp() {
-        _navigateToAuthAction.value = OpenSignUp
+        _navigateToAuthAction.value = SignUp
     }
 
     fun navigateToSingIn() {
-        _navigateToAuthAction.value = OpenSignIn
+        _navigateToAuthAction.value = SignIn
     }
 }

@@ -1,7 +1,7 @@
 package mx.android.buabap.ui
 
 sealed class AuthAction {
-    object OpenSignUp : AuthAction()
-    object OpenSignIn : AuthAction()
+    object SignUp : AuthAction()
+    object SignIn : AuthAction()
 }
 

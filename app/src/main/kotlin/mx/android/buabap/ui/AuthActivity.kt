@@ -8,11 +8,10 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import mx.android.buabap.databinding.ActivityAuthBinding
-import mx.android.buabap.ui.AuthAction.OpenSignIn
-import mx.android.buabap.ui.AuthAction.OpenSignUp
+import mx.android.buabap.ui.AuthAction.SignIn
+import mx.android.buabap.ui.AuthAction.SignUp
 
 class AuthActivity : AppCompatActivity() {
 
@@ -41,8 +40,8 @@ class AuthActivity : AppCompatActivity() {
 
     private fun openAuthAction(authAction: AuthAction?) = authAction?.run {
         when (this) {
-            is OpenSignUp -> Snackbar.make(binding.root, "Sing Up", LENGTH_LONG).show()
-            is OpenSignIn -> Snackbar.make(binding.root, "Sing in", LENGTH_LONG).show()
+            is SignUp -> Snackbar.make(binding.root, "Sing Up", LENGTH_LONG).show()
+            is SignIn -> Snackbar.make(binding.root, "Sing in", LENGTH_LONG).show()
         }
     }
 }
