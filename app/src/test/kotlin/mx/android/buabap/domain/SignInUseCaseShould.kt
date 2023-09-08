@@ -30,11 +30,11 @@ class SignInUseCaseShould {
     @Test
     fun `Get UserData when signIn is called and signIn authRepository is success`() = runTest {
         val userData = givenUserData()
-        val resultUserEntity = Result.success(userData)
+        val resultUserData = Result.success(userData)
 
-        whenever(authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultUserEntity))
+        whenever(authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultUserData))
 
-        val result = authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
+        val result = signInUseCase.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
 
         verify(authRepository).signIn(ANY_USER_EMAIL, ANY_PASSWORD)
         assertThatEquals(result.getOrNull(), userData)
@@ -46,7 +46,7 @@ class SignInUseCaseShould {
 
         whenever(authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultSignInException))
 
-        val result = authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
+        val result = signInUseCase.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
 
         verify(authRepository).signIn(ANY_USER_EMAIL, ANY_PASSWORD)
         assertThatIsInstanceOf<SignInException>(result.exceptionOrNull())
