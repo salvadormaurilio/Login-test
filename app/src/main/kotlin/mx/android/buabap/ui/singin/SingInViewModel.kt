@@ -8,4 +8,6 @@ import mx.android.buabap.ui.auth.AuthAction.SignIn
 import mx.android.buabap.ui.auth.AuthAction.SignUp
 
 class SingInViewModel(private val signInUseCase: SignInUseCase) : ViewModel() {
+
+
 }
