@@ -8,10 +8,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mx.android.buabap.domain.SignInUseCase
 import mx.android.buabap.domain.UserData
+import mx.android.buabap.ui.exception.AuthExceptionHandler
 import javax.inject.Inject
 
 @HiltViewModel
-class SingInViewModel @Inject constructor(private val signInUseCase: SignInUseCase) : ViewModel() {
+class SingInViewModel @Inject constructor(
+    private val authExceptionHandler: AuthExceptionHandler,
+    private val signInUseCase: SignInUseCase
+) : ViewModel() {
 
     private val _signInUiState = MutableStateFlow<SignInUiState?>(null)
 
@@ -21,6 +25,9 @@ class SingInViewModel @Inject constructor(private val signInUseCase: SignInUseCa
     fun signIn(email: String, password: String) = viewModelScope.launch {
         _signInUiState.value = SignInUiState.Loading
 
+        val (areInvalidCredentials, exception) = authExceptionHandler.areInvalidSingInCredentials(email, password)
+        if (areInvalidCredentials) return@launch emitSignInUiState(SignInUiState.Error(exception))
+
         signInUseCase.signIn(email, password).collect {
             signInSuccess(it)
             signInError(it)
@@ -28,11 +35,15 @@ class SingInViewModel @Inject constructor(private val signInUseCase: SignInUseCa
     }
 
     private fun signInSuccess(result: Result<UserData>) = result.onSuccess {
-        _signInUiState.value = SignInUiState.Success(it)
+        emitSignInUiState(SignInUiState.Success(it))
     }
 
     private fun signInError(result: Result<UserData>) = result.onFailure {
         it.printStackTrace()
-        _signInUiState.value = SignInUiState.Error(it)
+        emitSignInUiState(SignInUiState.Error(it))
+    }
+
+    private fun emitSignInUiState(signInUiState: SignInUiState) {
+        _signInUiState.value = signInUiState
     }
 }
