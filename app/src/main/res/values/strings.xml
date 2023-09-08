@@ -11,5 +11,6 @@
     <!--Messages-->
     <string name="error_sign_up">Error al registrar el usuario</string>
     <string name="success_sign_up">Usuario registrado con éxito</string>
-
+    <string name="error_sign_in">Usuario Invalido</string>
+    <string name="success_sign_in">Inicio sesión %1$s -%2$s </string>
 </resources>

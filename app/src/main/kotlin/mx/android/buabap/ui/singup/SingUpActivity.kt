@@ -75,7 +75,7 @@ class SingUpActivity : AppCompatActivity() {
         signUpProgress.showOrHide(false)
         signUpButton.isEnabled = true
         when (error) {
-            is SignUpException -> root.snackbar(R.string.email).showError()
+            is SignUpException -> root.snackbar(R.string.error_sign_up).showError()
             else -> root.snackbar(error.message).showError()
         }
     }

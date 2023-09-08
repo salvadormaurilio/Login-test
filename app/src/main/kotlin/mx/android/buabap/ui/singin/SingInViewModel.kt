@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mx.android.buabap.domain.SignInUseCase
+import mx.android.buabap.domain.UserData
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,14 +21,18 @@ class SingInViewModel @Inject constructor(private val signInUseCase: SignInUseCa
     fun signIn(email: String, password: String) = viewModelScope.launch {
         _signInUiState.value = SignInUiState.Loading
 
-        signInUseCase.signIn(email, password).collect { it ->
-            it.onSuccess {
-                _signInUiState.value = SignInUiState.Success(it)
-            }
-            it.onFailure {
-                it.printStackTrace()
-                _signInUiState.value = SignInUiState.Error(it)
-            }
+        signInUseCase.signIn(email, password).collect {
+            signInSuccess(it)
+            signInError(it)
         }
+    }
+
+    private fun signInSuccess(result: Result<UserData>) = result.onSuccess {
+        _signInUiState.value = SignInUiState.Success(it)
+    }
+
+    private fun signInError(result: Result<UserData>) = result.onFailure {
+        it.printStackTrace()
+        _signInUiState.value = SignInUiState.Error(it)
     }
 }
