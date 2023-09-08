@@ -1,12 +1,13 @@
 package mx.android.buabap.data
 
 import kotlinx.coroutines.flow.map
-import mx.android.buabap.data.datasource.local.database.toResultUserData
 import mx.android.buabap.data.datasource.local.AuthLocalDataSource
+import mx.android.buabap.data.datasource.local.database.toResultUserData
 import mx.android.buabap.domain.UserCredentials
 import mx.android.buabap.domain.toUserEntity
+import javax.inject.Inject
 
-class AuthRepository(private val authLocalDataSource: AuthLocalDataSource) {
+class AuthRepository @Inject constructor(private val authLocalDataSource: AuthLocalDataSource) {
 
     fun signUp(userCredentials: UserCredentials) = authLocalDataSource.signUp(userCredentials.toUserEntity())
 

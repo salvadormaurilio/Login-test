@@ -2,12 +2,15 @@ package mx.android.buabap.ui.singin
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mx.android.buabap.domain.SignInUseCase
+import javax.inject.Inject
 
-class SingInViewModel(private val signInUseCase: SignInUseCase) : ViewModel() {
+@HiltViewModel
+class SingInViewModel @Inject constructor(private val signInUseCase: SignInUseCase) : ViewModel() {
 
     private val _signInUiState = MutableStateFlow<SignInUiState?>(null)
 

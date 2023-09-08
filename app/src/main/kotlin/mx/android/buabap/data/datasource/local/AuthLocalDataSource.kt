@@ -2,12 +2,13 @@ package mx.android.buabap.data.datasource.local
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import mx.android.buabap.data.datasource.local.database.UserDao
-import mx.android.buabap.data.datasource.local.database.UserEntity
 import mx.android.buabap.data.datasource.exception.SignInException
 import mx.android.buabap.data.datasource.exception.SignUpException
+import mx.android.buabap.data.datasource.local.database.UserDao
+import mx.android.buabap.data.datasource.local.database.UserEntity
+import javax.inject.Inject
 
-class AuthLocalDataSource(private val userDao: UserDao) {
+class AuthLocalDataSource @Inject constructor(private val userDao: UserDao) {
 
     fun signUp(userEntity: UserEntity): Flow<Result<Boolean>> = flow {
         val id = userDao.insert(userEntity)
