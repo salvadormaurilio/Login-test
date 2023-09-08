@@ -3,7 +3,7 @@ package mx.android.buabap.ui.auth
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle.State.STARTED
+import androidx.lifecycle.Lifecycle.State.CREATED
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
@@ -12,6 +12,7 @@ import mx.android.buabap.databinding.ActivityAuthBinding
 import mx.android.buabap.ui.auth.AuthAction.SignIn
 import mx.android.buabap.ui.auth.AuthAction.SignUp
 import mx.android.buabap.ui.singin.SingInActivity
+import mx.android.buabap.ui.singup.SingUpActivity
 
 class AuthActivity : AppCompatActivity() {
 
@@ -34,16 +35,18 @@ class AuthActivity : AppCompatActivity() {
 
     private suspend fun collectNavigationToAuthAction() {
         authViewModel.navigateToAuthAction
-            .flowWithLifecycle(lifecycle, STARTED)
+            .flowWithLifecycle(lifecycle, CREATED)
             .collect { authAction -> openAuthAction(authAction) }
     }
 
     private fun openAuthAction(authAction: AuthAction?) = authAction?.run {
         when (this) {
-            is SignUp -> openSingInActivity()
+            is SignUp -> openSingUpActivity()
             is SignIn -> openSingInActivity()
         }
     }
+
+    private fun openSingUpActivity() = intentTo<SingUpActivity>(this).run { startActivity(this) }
 
     private fun openSingInActivity() = intentTo<SingInActivity>(this).run { startActivity(this) }
 }

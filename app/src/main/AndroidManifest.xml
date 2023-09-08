@@ -26,6 +26,10 @@
         <activity
             android:name=".ui.singin.SingInActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".ui.singup.SingUpActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
