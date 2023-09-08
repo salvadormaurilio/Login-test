@@ -39,18 +39,18 @@ class SingInViewModelShould {
     }
 
     @Test
-    fun `Test 1`() = runTest {
+    fun `get EmailException from signInUiState when signIn is called and email is invalid`() = runTest {
         singInViewModel.signIn(ANY_INVALID_USER_EMAIL, ANY_PASSWORD)
 
         val result = singInViewModel.signInUiState.first()
 
         verify(signInUseCase, never()).signIn(ANY_INVALID_USER_EMAIL, ANY_PASSWORD)
         assertThatIsInstanceOf<SignInUiState.Error>(result)
-        assertThatIsInstanceOf<AuthUiException.Email>((result as SignInUiState.Error).error)
+        assertThatIsInstanceOf<AuthUiException.EmailException>((result as SignInUiState.Error).error)
     }
 
     @Test
-    fun `Test 2`() = runTest {
+    fun `get UserData from signInUiState when signIn is called and signInUseCase is success`() = runTest {
         val userData = givenUserData()
         val resultUserData = Result.success(userData)
 
@@ -66,7 +66,7 @@ class SingInViewModelShould {
     }
 
     @Test
-    fun `Test 3`() = runTest {
+    fun `get SignInException from signInUiState when signIn is called and signInUseCase is failure`() = runTest {
         val resultSignInException: Result<UserData> = Result.failure(AuthException.SignInException())
 
         whenever(signInUseCase.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultSignInException))

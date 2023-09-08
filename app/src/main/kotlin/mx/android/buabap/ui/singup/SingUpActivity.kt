@@ -77,11 +77,11 @@ class SingUpActivity : AppCompatActivity() {
         signUpButton.isEnabled = true
         when (error) {
             is AuthException.SignUpException -> root.snackbar(R.string.error_sign_up).showError()
-            is AuthUiException.Name -> nameInputLayout.error = getString(R.string.error_name_invalid)
-            is AuthUiException.Email -> emailInputLayout.error = getString(R.string.error_email_invalid)
-            is AuthUiException.Password -> passwordInputLayout.error = getString(R.string.error_password_invalid)
-            is AuthUiException.ConfirmPassword -> confirmPasswordInputLayout.error = getString(R.string.error_password_invalid)
-            is AuthUiException.DifferentPassword -> confirmPasswordInputLayout.error = getString(R.string.error_password_different)
+            is AuthUiException.NameException -> nameInputLayout.error = getString(R.string.error_name_invalid)
+            is AuthUiException.EmailException -> emailInputLayout.error = getString(R.string.error_email_invalid)
+            is AuthUiException.PasswordException -> passwordInputLayout.error = getString(R.string.error_password_invalid)
+            is AuthUiException.ConfirmPasswordException -> confirmPasswordInputLayout.error = getString(R.string.error_password_invalid)
+            is AuthUiException.DifferentPasswordException -> confirmPasswordInputLayout.error = getString(R.string.error_password_different)
             else -> root.snackbar(error.message).showError()
         }
     }

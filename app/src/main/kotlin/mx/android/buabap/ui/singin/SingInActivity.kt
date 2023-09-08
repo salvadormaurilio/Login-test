@@ -70,8 +70,8 @@ class SingInActivity : AppCompatActivity() {
         signInButton.isEnabled = true
         when (error) {
             is AuthException.SignInException -> root.snackbar(R.string.error_sign_in).showError()
-            is AuthUiException.Email -> emailInputLayout.error = getString(R.string.error_email_invalid)
-            is AuthUiException.Password -> passwordInputLayout.error = getString(R.string.error_password_invalid)
+            is AuthUiException.EmailException -> emailInputLayout.error = getString(R.string.error_email_invalid)
+            is AuthUiException.PasswordException -> passwordInputLayout.error = getString(R.string.error_password_invalid)
             else -> root.snackbar(error.message).showError()
         }
     }

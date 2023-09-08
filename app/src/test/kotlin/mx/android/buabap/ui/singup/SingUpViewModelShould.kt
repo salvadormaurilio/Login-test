@@ -36,7 +36,7 @@ class SingUpViewModelShould {
     }
 
     @Test
-    fun `Test 1`() = runTest {
+    fun `get EmailException from signUpUiState when singUp is called and email is invalid`() = runTest {
         val userCredentialsUi = givenUserCredentialsUiWithInvalidEmail()
         val userCredentials = givenUserCredentials()
 
@@ -46,11 +46,11 @@ class SingUpViewModelShould {
 
         verify(signUpUseCase, never()).signUp(userCredentials)
         assertThatIsInstanceOf<SignUpUiState.Error>(result)
-        assertThatIsInstanceOf<AuthUiException.Email>((result as SignUpUiState.Error).error)
+        assertThatIsInstanceOf<AuthUiException.EmailException>((result as SignUpUiState.Error).error)
     }
 
     @Test
-    fun `Test 2`() = runTest {
+    fun `get true from signUpUiState when singUp is called and signUpUseCase is success`() = runTest {
         val userCredentialsUi = givenUserCredentialsUi()
         val userCredentials = givenUserCredentials()
         val resultTrue = Result.success(true)
@@ -66,7 +66,7 @@ class SingUpViewModelShould {
     }
 
     @Test
-    fun `Test 3`() = runTest {
+    fun `get SignUpException from signUpUiState when singUp is called and signUpUseCase is failure`() = runTest {
         val userCredentialsUi = givenUserCredentialsUi()
         val userCredentials = givenUserCredentials()
         val resultSignUpException: Result<Boolean> = Result.failure(AuthException.SignUpException())
