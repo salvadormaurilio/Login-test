@@ -53,6 +53,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.constraint.layout)
 
+    implementation (libs.fragment.ktx)
+
     implementation(libs.room.rutime)
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
