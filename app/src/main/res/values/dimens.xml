@@ -5,7 +5,7 @@
     <dimen name="small_text">12sp</dimen>
     <dimen name="inter_text">14sp</dimen>
     <dimen name="medium_text">16sp</dimen>
-    <dimen name="big_text">18sp</dimen>
+    <dimen name="big_text">24sp</dimen>
 
     <!--Generic Spaces-->
     <dimen name="space_0">0dp</dimen>
@@ -17,5 +17,6 @@
     <dimen name="space_12">12dp</dimen>
     <dimen name="space_14">14dp</dimen>
     <dimen name="space_16">16dp</dimen>
+    <dimen name="space_32">32dp</dimen>
 
 </resources>

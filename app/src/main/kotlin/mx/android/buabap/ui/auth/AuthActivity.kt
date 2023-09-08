@@ -6,12 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle.State.STARTED
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
+import mx.android.buabap.core.ui.intentTo
 import mx.android.buabap.databinding.ActivityAuthBinding
 import mx.android.buabap.ui.auth.AuthAction.SignIn
 import mx.android.buabap.ui.auth.AuthAction.SignUp
+import mx.android.buabap.ui.singin.SingInActivity
 
 class AuthActivity : AppCompatActivity() {
 
@@ -40,8 +40,10 @@ class AuthActivity : AppCompatActivity() {
 
     private fun openAuthAction(authAction: AuthAction?) = authAction?.run {
         when (this) {
-            is SignUp -> Snackbar.make(binding.root, "Sing Up", LENGTH_LONG).show()
-            is SignIn -> Snackbar.make(binding.root, "Sing in", LENGTH_LONG).show()
+            is SignUp -> openSingInActivity()
+            is SignIn -> openSingInActivity()
         }
     }
+
+    private fun openSingInActivity() = intentTo<SingInActivity>(this).run { startActivity(this) }
 }
