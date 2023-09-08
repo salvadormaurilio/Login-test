@@ -14,7 +14,7 @@ import mx.android.buabap.core.ui.showError
 import mx.android.buabap.core.ui.showOrHide
 import mx.android.buabap.core.ui.showSuccess
 import mx.android.buabap.core.ui.snackbar
-import mx.android.buabap.data.datasource.exception.SignUpException
+import mx.android.buabap.data.datasource.exception.AuthException
 import mx.android.buabap.databinding.ActivitySignUpBinding
 import mx.android.buabap.ui.exception.AuthUiException
 import mx.android.buabap.ui.singin.UserCredentialsUi
@@ -76,7 +76,7 @@ class SingUpActivity : AppCompatActivity() {
         signUpProgress.showOrHide(false)
         signUpButton.isEnabled = true
         when (error) {
-            is SignUpException -> root.snackbar(R.string.error_sign_up).showError()
+            is AuthException.SignUpException -> root.snackbar(R.string.error_sign_up).showError()
             is AuthUiException.Name -> nameInputLayout.error = getString(R.string.error_name_invalid)
             is AuthUiException.Email -> emailInputLayout.error = getString(R.string.error_email_invalid)
             is AuthUiException.Password -> passwordInputLayout.error = getString(R.string.error_password_invalid)

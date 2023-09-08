@@ -14,7 +14,7 @@ import mx.android.buabap.core.ui.showError
 import mx.android.buabap.core.ui.showOrHide
 import mx.android.buabap.core.ui.showSuccess
 import mx.android.buabap.core.ui.snackbar
-import mx.android.buabap.data.datasource.exception.SignInException
+import mx.android.buabap.data.datasource.exception.AuthException
 import mx.android.buabap.databinding.ActivitySignInBinding
 import mx.android.buabap.domain.UserData
 import mx.android.buabap.ui.exception.AuthUiException
@@ -69,7 +69,7 @@ class SingInActivity : AppCompatActivity() {
         signInProgress.showOrHide(false)
         signInButton.isEnabled = true
         when (error) {
-            is SignInException -> root.snackbar(R.string.error_sign_in).showError()
+            is AuthException.SignInException -> root.snackbar(R.string.error_sign_in).showError()
             is AuthUiException.Email -> emailInputLayout.error = getString(R.string.error_email_invalid)
             is AuthUiException.Password -> passwordInputLayout.error = getString(R.string.error_password_invalid)
             else -> root.snackbar(error.message).showError()
