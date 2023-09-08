@@ -8,9 +8,9 @@ import mx.android.buabap.ui.AuthAction.OpenSignUp
 
 class AuthViewModel : ViewModel() {
 
-    private val _navigateToAuthAction = MutableStateFlow<AuthAction>(OpenSignUp)
+    private val _navigateToAuthAction = MutableStateFlow<AuthAction?>(null)
 
-    val navigateToAuthAction: StateFlow<AuthAction>
+    val navigateToAuthAction: StateFlow<AuthAction?>
         get() = _navigateToAuthAction
 
     fun navigateToSingUp() {
@@ -19,6 +19,5 @@ class AuthViewModel : ViewModel() {
 
     fun navigateToSingIn() {
         _navigateToAuthAction.value = OpenSignIn
-
     }
 }
