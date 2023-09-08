@@ -13,4 +13,9 @@
     <string name="success_sign_up">Usuario registrado con éxito</string>
     <string name="error_sign_in">Usuario Invalido</string>
     <string name="success_sign_in">Inicio sesión %1$s -%2$s </string>
+
+    <string name="error_name_invalid">Nombre Invalido</string>
+    <string name="error_email_invalid">Correo Invalido</string>
+    <string name="error_password_invalid">Contraseña Invalida</string>
+    <string name="error_password_different">La contraseña es Diferente</string>
 </resources>
