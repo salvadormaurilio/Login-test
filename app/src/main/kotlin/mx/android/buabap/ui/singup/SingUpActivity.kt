@@ -10,9 +10,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import mx.android.buabap.R
 import mx.android.buabap.core.ui.getString
+import mx.android.buabap.core.ui.showAlertDialog
 import mx.android.buabap.core.ui.showError
 import mx.android.buabap.core.ui.showOrHide
-import mx.android.buabap.core.ui.showSuccess
 import mx.android.buabap.core.ui.snackbar
 import mx.android.buabap.data.datasource.exception.AuthException
 import mx.android.buabap.databinding.ActivitySignUpBinding
@@ -69,7 +69,7 @@ class SingUpActivity : AppCompatActivity() {
     private fun signUpUiStateSuccess() = binding.run {
         signUpProgress.showOrHide(false)
         signUpButton.isEnabled = true
-        root.snackbar(R.string.success_sign_up).showSuccess()
+        showAlertDialog(getString(R.string.success_sign_up))
     }
 
     private fun signUpUiStateError(error: Throwable) = binding.run {

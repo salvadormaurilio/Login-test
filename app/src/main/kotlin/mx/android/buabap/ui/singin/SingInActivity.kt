@@ -10,9 +10,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import mx.android.buabap.R
 import mx.android.buabap.core.ui.getString
+import mx.android.buabap.core.ui.showAlertDialog
 import mx.android.buabap.core.ui.showError
 import mx.android.buabap.core.ui.showOrHide
-import mx.android.buabap.core.ui.showSuccess
 import mx.android.buabap.core.ui.snackbar
 import mx.android.buabap.data.datasource.exception.AuthException
 import mx.android.buabap.databinding.ActivitySignInBinding
@@ -48,24 +48,24 @@ class SingInActivity : AppCompatActivity() {
 
     private fun handleSignInUiState(signUpUiState: SignInUiState?) = signUpUiState?.run {
         when (this) {
-            is SignInUiState.Loading -> signUpUiStateLoading()
-            is SignInUiState.Success -> signUpUiStateSuccess(userData)
-            is SignInUiState.Error -> signUpUiStateError(error)
+            is SignInUiState.Loading -> signInUiStateLoading()
+            is SignInUiState.Success -> signInUiStateSuccess(userData)
+            is SignInUiState.Error -> signUpInStateError(error)
         }
     }
 
-    private fun signUpUiStateLoading() = binding.run {
+    private fun signInUiStateLoading() = binding.run {
         signInProgress.showOrHide(true)
         signInButton.isEnabled = false
     }
 
-    private fun signUpUiStateSuccess(userData: UserData) = binding.run {
+    private fun signInUiStateSuccess(userData: UserData) = binding.run {
         signInProgress.showOrHide(false)
         signInButton.isEnabled = true
-        root.snackbar(getString(R.string.success_sign_in, userData.name, userData.email)).showSuccess()
+        showAlertDialog(getString(R.string.success_sign_in, userData.name, userData.email))
     }
 
-    private fun signUpUiStateError(error: Throwable) = binding.run {
+    private fun signUpInStateError(error: Throwable) = binding.run {
         signInProgress.showOrHide(false)
         signInButton.isEnabled = true
         when (error) {

@@ -46,7 +46,7 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
-    private fun openSingUpActivity() = intentTo<SingUpActivity>(this).run { startActivity(this) }
+    private fun openSingUpActivity() = intentTo<SingUpActivity>().run { startActivity(this) }
 
-    private fun openSingInActivity() = intentTo<SingInActivity>(this).run { startActivity(this) }
+    private fun openSingInActivity() = intentTo<SingInActivity>().run { startActivity(this) }
 }
