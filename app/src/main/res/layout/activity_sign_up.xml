@@ -92,7 +92,7 @@
         android:layout_marginHorizontal="@dimen/space_32"
         android:layout_marginVertical="@dimen/space_16"
         android:hint="@string/confirm_password"
-        app:layout_constraintBottom_toTopOf="@id/sign_up_button"
+        app:layout_constraintBottom_toTopOf="@id/confirm_sign_up_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password_input_layout"
@@ -107,7 +107,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/sign_up_button"
+        android:id="@+id/confirm_sign_up_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/space_32"

@@ -35,7 +35,7 @@ class SingUpActivity : AppCompatActivity() {
     }
 
     private fun initUi() = binding.run {
-        signUpButton.setOnClickListener {
+        confirmSignUpButton.setOnClickListener {
             singUpViewModel.singUp(buildUserCredentialsUi())
         }
     }
@@ -63,18 +63,18 @@ class SingUpActivity : AppCompatActivity() {
 
     private fun signUpUiStateLoading() = binding.run {
         signUpProgress.showOrHide(true)
-        signUpButton.isEnabled = false
+        confirmSignUpButton.isEnabled = false
     }
 
     private fun signUpUiStateSuccess() = binding.run {
         signUpProgress.showOrHide(false)
-        signUpButton.isEnabled = true
+        confirmSignUpButton.isEnabled = true
         showAlertDialog(getString(R.string.success_sign_up)) { finish() }
     }
 
     private fun signUpUiStateError(error: Throwable) = binding.run {
         signUpProgress.showOrHide(false)
-        signUpButton.isEnabled = true
+        confirmSignUpButton.isEnabled = true
         when (error) {
             is AuthException.UserAlreadyExistException -> showAlertDialog(getString(R.string.error_user_already_exit))
             is AuthException.SignUpException -> showAlertDialog(getString(R.string.error_sign_up))
