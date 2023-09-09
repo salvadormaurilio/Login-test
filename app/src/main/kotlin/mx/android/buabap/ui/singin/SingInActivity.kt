@@ -35,7 +35,7 @@ class SingInActivity : AppCompatActivity() {
     }
 
     private fun initUi() = binding.run {
-        signInButton.setOnClickListener {
+        confirmSignInButton.setOnClickListener {
             singInViewModel.signIn(email = emailEditText.getString(), password = passwordEditText.getString())
         }
     }
@@ -56,18 +56,18 @@ class SingInActivity : AppCompatActivity() {
 
     private fun signInUiStateLoading() = binding.run {
         signInProgress.showOrHide(true)
-        signInButton.isEnabled = false
+        confirmSignInButton.isEnabled = false
     }
 
     private fun signInUiStateSuccess(userData: UserData) = binding.run {
         signInProgress.showOrHide(false)
-        signInButton.isEnabled = true
+        confirmSignInButton.isEnabled = true
         showAlertDialog(getString(R.string.success_sign_in, userData.name, userData.email)) { finish() }
     }
 
     private fun signUpInStateError(error: Throwable) = binding.run {
         signInProgress.showOrHide(false)
-        signInButton.isEnabled = true
+        confirmSignInButton.isEnabled = true
         when (error) {
             is AuthException.SignInException -> showAlertDialog(getString(R.string.error_sign_in))
             is AuthUiException.EmailException -> emailInputLayout.error = getString(R.string.error_email_invalid)

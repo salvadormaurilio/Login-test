@@ -70,8 +70,9 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
 
     androidTestImplementation(libs.ext.junit)
-    androidTestImplementation (libs.core.testing)
-    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.core.testing)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.androidx.core.ktx.test)
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
 }
