@@ -1,12 +1,21 @@
 package mx.android.buabap.ui.auth
 
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.runTest
+import mx.android.buabap.core.TestDispatcherRule
 import mx.android.buabap.core.assertThatEquals
 import mx.android.buabap.ui.auth.AuthAction.SignIn
 import mx.android.buabap.ui.auth.AuthAction.SignUp
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class AuthViewModelShould {
+
+    @get:Rule
+    var testDispatcherRule = TestDispatcherRule()
 
     private lateinit var authViewModel: AuthViewModel
 
@@ -16,20 +25,28 @@ class AuthViewModelShould {
     }
 
     @Test
-    fun `navigate to ignUp when navigateToSingUp is called`() {
+    fun `navigate to signUp when navigateToSingUp is called`() = runTest {
+        var result: AuthAction? = null
+
+        authViewModel.viewModelScope.launch {
+            result = authViewModel.navigateToAuthAction.first()
+        }
+
         authViewModel.navigateToSingUp()
 
-        val value = authViewModel.navigateToAuthAction.value
-
-        assertThatEquals(value, SignUp)
+        assertThatEquals(result, SignUp)
     }
 
     @Test
-    fun `navigate to SignIn when navigateToSingIn is called`() {
+    fun `navigate to SignIn when navigateToSingIn is called`() = runTest {
+        var result: AuthAction? = null
+
+        authViewModel.viewModelScope.launch {
+            result = authViewModel.navigateToAuthAction.first()
+        }
+
         authViewModel.navigateToSingIn()
 
-        val value = authViewModel.navigateToAuthAction.value
-
-        assertThatEquals(value, SignIn)
+        assertThatEquals(result, SignIn)
     }
 }

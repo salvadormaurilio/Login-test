@@ -1,23 +1,25 @@
 package mx.android.buabap.ui.auth
 
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.launch
 import mx.android.buabap.ui.auth.AuthAction.SignIn
 import mx.android.buabap.ui.auth.AuthAction.SignUp
 
 class AuthViewModel : ViewModel() {
 
-    private val _navigateToAuthAction = MutableStateFlow<AuthAction?>(null)
+    private val _navigateToAuthAction = MutableSharedFlow<AuthAction?>()
 
-    val navigateToAuthAction: StateFlow<AuthAction?>
+    val navigateToAuthAction: SharedFlow<AuthAction?>
         get() = _navigateToAuthAction
 
-    fun navigateToSingUp() {
-        _navigateToAuthAction.value = SignUp
+    fun navigateToSingUp() = viewModelScope.launch {
+        _navigateToAuthAction.emit(SignUp)
     }
 
-    fun navigateToSingIn() {
-        _navigateToAuthAction.value = SignIn
+    fun navigateToSingIn() = viewModelScope.launch {
+        _navigateToAuthAction.emit(SignIn)
     }
 }
