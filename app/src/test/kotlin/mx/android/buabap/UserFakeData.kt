@@ -13,7 +13,7 @@ const val ANY_USER_EMAIL = "salvador@google.mx"
 const val ANY_INVALID_USER_EMAIL = "salvadorbuapap.mx"
 const val ANY_PASSWORD = "Admin1234_1"
 const val ANY_INVALID_PASSWORD = "Admi"
-private const val ANY_OTHER_PASSWORD = "Admin987"
+private const val ANY_OTHER_PASSWORD = "Admin1234_12"
 
 fun givenUserEntity() = UserEntity(
     id = ANY_ID,
