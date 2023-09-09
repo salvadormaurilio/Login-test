@@ -14,6 +14,7 @@ import mx.android.buabap.givenUserEntity
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
@@ -32,22 +33,40 @@ class AuthLocalDataShould {
     fun `Get success when signUp is called and insert UserEntity is success`() = runTest {
         val userEntity = givenUserEntity()
 
+        whenever(userDao.exist(ANY_USER_EMAIL)).thenReturn(false)
         whenever(userDao.insert(userEntity)).thenReturn(ANY_ID)
 
         val result = authLocalDataSource.signUp(userEntity).first()
 
+        verify(userDao).exist(ANY_USER_EMAIL)
         verify(userDao).insert(userEntity)
         assertThatEquals(result.getOrNull(), true)
     }
 
     @Test
+    fun `Get UserAlreadyExistException when signUp is called and user already exist in data base`() = runTest {
+        val userEntity = givenUserEntity()
+
+        whenever(userDao.exist(ANY_USER_EMAIL)).thenReturn(true)
+
+        val result = authLocalDataSource.signUp(userEntity).first()
+
+        verify(userDao).exist(ANY_USER_EMAIL)
+        verify(userDao, never()).insert(userEntity)
+        assertThatIsInstanceOf<AuthException.UserAlreadyExistException>(result.exceptionOrNull())
+    }
+
+
+    @Test
     fun `Get SignUpException when signUp is called and insert UserEntity is failure`() = runTest {
         val userEntity = givenUserEntity()
 
+        whenever(userDao.exist(ANY_USER_EMAIL)).thenReturn(false)
         whenever(userDao.insert(userEntity)).thenReturn(ANY_INVALID_ID)
 
         val result = authLocalDataSource.signUp(userEntity).first()
 
+        verify(userDao).exist(ANY_USER_EMAIL)
         verify(userDao).insert(userEntity)
         assertThatIsInstanceOf<AuthException.SignUpException>(result.exceptionOrNull())
     }

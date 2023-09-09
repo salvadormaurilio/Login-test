@@ -53,4 +53,22 @@ class UserDaoShould {
 
         assertIsNull(userEntityResult)
     }
+
+    @Test
+    fun getTrueFromUserDaoWhenUserAlreadyExist() = runTest {
+        val userEntity = givenUserEntity()
+
+        userDao.insert(userEntity)
+
+        val result = userDao.exist(ANY_USER_EMAIL)
+
+        assertThatEquals(result, true)
+    }
+
+    @Test
+    fun getFalseFromUserDaoWhenUserNotExist() = runTest {
+        val result = userDao.exist(ANY_USER_EMAIL)
+
+        assertThatEquals(result, false)
+    }
 }

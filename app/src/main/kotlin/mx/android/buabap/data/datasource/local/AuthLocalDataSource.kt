@@ -12,12 +12,16 @@ class AuthLocalDataSource @Inject constructor(private val userDao: UserDao) {
 
     fun signUp(userEntity: UserEntity): Flow<Result<Boolean>> = flow {
         delay(DELAY_RESPONSE)
+
+        if (userDao.exist(userEntity.email)) emit(Result.failure(AuthException.UserAlreadyExistException()))
+
         val id = userDao.insert(userEntity)
         if (id > INVALID_ID) emit(Result.success(true)) else emit(Result.failure(AuthException.SignUpException()))
     }
 
     fun signIn(email: String, password: String): Flow<Result<UserEntity>> = flow {
         delay(DELAY_RESPONSE)
+
         val userEntity = userDao.get(email, password)
         if (userEntity != null) emit(Result.success(userEntity)) else emit(Result.failure(AuthException.SignInException()))
     }

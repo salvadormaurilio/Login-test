@@ -76,6 +76,7 @@ class SingUpActivity : AppCompatActivity() {
         signUpProgress.showOrHide(false)
         signUpButton.isEnabled = true
         when (error) {
+            is AuthException.UserAlreadyExistException -> showAlertDialog(getString(R.string.error_user_already_exit))
             is AuthException.SignUpException -> showAlertDialog(getString(R.string.error_sign_up))
             is AuthUiException.NameException -> nameInputLayout.error = getString(R.string.error_name_invalid)
             is AuthUiException.EmailException -> emailInputLayout.error = getString(R.string.error_email_invalid)
