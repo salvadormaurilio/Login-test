@@ -62,7 +62,7 @@ class SingInActivity : AppCompatActivity() {
     private fun signInUiStateSuccess(userData: UserData) = binding.run {
         signInProgress.showOrHide(false)
         signInButton.isEnabled = true
-        showAlertDialog(getString(R.string.success_sign_in, userData.name, userData.email))
+        showAlertDialog(getString(R.string.success_sign_in, userData.name, userData.email)) { finish() }
     }
 
     private fun signUpInStateError(error: Throwable) = binding.run {
