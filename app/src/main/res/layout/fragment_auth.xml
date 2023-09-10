@@ -11,14 +11,14 @@
         android:layout_width="@dimen/space_0"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/space_64"
+        android:layout_marginVertical="@dimen/space_32"
         android:contentDescription="@string/app_name"
         android:src="@drawable/logo_buapap"
-        android:layout_marginVertical="@dimen/space_32"
         app:layout_constraintBottom_toTopOf="@id/sign_up_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_up_button"
