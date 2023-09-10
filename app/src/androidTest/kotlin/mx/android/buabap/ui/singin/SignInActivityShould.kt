@@ -17,6 +17,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import mx.android.buabap.ANY_INVALID_PASSWORD
 import mx.android.buabap.ANY_INVALID_USER_EMAIL
 import mx.android.buabap.ANY_NAME
+import mx.android.buabap.ANY_OTHER_PASSWORD
 import mx.android.buabap.ANY_PASSWORD
 import mx.android.buabap.ANY_USER_EMAIL
 import mx.android.buabap.R
@@ -96,14 +97,14 @@ class SignInActivityShould {
     }
 
     @Test
-    fun displayErrorSingInWhenTypeSingInIsFaiure() {
+    fun displayErrorSingInWhenTypeSingInIsFailure() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val errorSingInText = context.getString(R.string.error_sign_in)
 
         launchActivity<SingInActivity>()
 
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
-        onView(withId(R.id.password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
+        onView(withId(R.id.password_edit_text)).perform(typeText(ANY_OTHER_PASSWORD), pressKey(KEYCODE_ENTER))
         closeSoftKeyboard()
 
         onView(withId(R.id.confirm_sign_in_button)).perform(click())
