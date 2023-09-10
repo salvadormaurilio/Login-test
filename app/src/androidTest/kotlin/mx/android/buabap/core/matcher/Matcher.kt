@@ -1,4 +1,4 @@
-package mx.android.buabap.core
+package mx.android.buabap.core.matcher
 
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.instanceOf

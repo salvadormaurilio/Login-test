@@ -1,14 +1,14 @@
 package mx.android.buabap.data.datasource.local.database
 
 import kotlinx.coroutines.test.runTest
+import mx.android.buabap.ANY_AUTO_ID
+import mx.android.buabap.ANY_INVALID_PASSWORD
+import mx.android.buabap.ANY_PASSWORD
+import mx.android.buabap.ANY_USER_EMAIL
 import mx.android.buabap.core.RoomRule
-import mx.android.buabap.core.assertIsNull
-import mx.android.buabap.core.assertThatEquals
-import mx.android.buabap.data.datasource.local.ANY_AUTO_ID
-import mx.android.buabap.data.datasource.local.ANY_INVALID_PASSWORD
-import mx.android.buabap.data.datasource.local.ANY_PASSWORD
-import mx.android.buabap.data.datasource.local.ANY_USER_EMAIL
-import mx.android.buabap.data.datasource.local.givenUserEntity
+import mx.android.buabap.core.matcher.assertIsNull
+import mx.android.buabap.core.matcher.assertThatEquals
+import mx.android.buabap.givenUserEntity
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
