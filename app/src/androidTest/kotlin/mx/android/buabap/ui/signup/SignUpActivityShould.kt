@@ -24,7 +24,9 @@ import mx.android.buabap.ANY_USER_EMAIL
 import mx.android.buabap.R
 import mx.android.buabap.core.CountingIdlingResourceRule
 import mx.android.buabap.core.matcher.LoginErrorTextMatchers.withErrorText
+import mx.android.buabap.data.datasource.local.database.DATABASE_USER_NAME
 import mx.android.buabap.ui.singup.SingUpActivity
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -32,6 +34,11 @@ class SignUpActivityShould {
 
     @get:Rule
     val countingIdlingResourceRule = CountingIdlingResourceRule()
+
+    @Before
+    fun setUp() {
+        getApplicationContext<Context>().deleteDatabase(DATABASE_USER_NAME);
+    }
 
     @Test
     fun displayViewsWhenSingUpActivityStart() {
@@ -141,5 +148,36 @@ class SignUpActivityShould {
         onView(withId(R.id.confirm_sign_up_button)).perform(click())
 
         onView(withText(successSingUpText)).inRoot(isDialog()).check(matches(isDisplayed()));
+    }
+
+    @Test
+    fun displaySuccessSingUpWhenTypeSingUpIsSuccess2() {
+        val context = getApplicationContext<Context>()
+        val errorUserAlreadyExistText = context.getString(R.string.error_user_already_exit)
+
+        //First Register some user
+        val scenario = launchActivity<SingUpActivity>()
+
+        onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
+        onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
+        onView(withId(R.id.password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
+        onView(withId(R.id.confirm_password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
+        closeSoftKeyboard()
+        onView(withId(R.id.confirm_sign_up_button)).perform(click())
+
+        scenario.close()
+
+        //Then validate Second user registration
+        launchActivity<SingUpActivity>()
+
+        onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
+        onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
+        onView(withId(R.id.password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
+        onView(withId(R.id.confirm_password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
+        closeSoftKeyboard()
+
+        onView(withId(R.id.confirm_sign_up_button)).perform(click())
+
+        onView(withText(errorUserAlreadyExistText)).inRoot(isDialog()).check(matches(isDisplayed()));
     }
 }

@@ -2,7 +2,7 @@ package mx.android.buabap.ui.singin
 
 import android.content.Context
 import android.view.KeyEvent.KEYCODE_ENTER
-import androidx.test.core.app.ApplicationProvider
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.core.app.launchActivity
 import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
@@ -23,7 +23,9 @@ import mx.android.buabap.ANY_USER_EMAIL
 import mx.android.buabap.R
 import mx.android.buabap.core.CountingIdlingResourceRule
 import mx.android.buabap.core.matcher.LoginErrorTextMatchers.withErrorText
+import mx.android.buabap.data.datasource.local.database.DATABASE_USER_NAME
 import mx.android.buabap.ui.singup.SingUpActivity
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -31,6 +33,11 @@ class SignInActivityShould {
 
     @get:Rule
     val countingIdlingResourceRule = CountingIdlingResourceRule()
+
+    @Before
+    fun setUp() {
+        getApplicationContext<Context>().deleteDatabase(DATABASE_USER_NAME);
+    }
 
     @Test
     fun displayViewsWhenSingUpActivityStart() {
@@ -44,7 +51,7 @@ class SignInActivityShould {
 
     @Test
     fun displayErrorEmailInvalidWhenTypeInvalidEmail() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
+        val context = getApplicationContext<Context>()
         val emailInvalidText = context.getString(R.string.error_email_invalid)
 
         launchActivity<SingInActivity>()
@@ -59,7 +66,7 @@ class SignInActivityShould {
 
     @Test
     fun displayErrorPasswordInvalidWhenTypeInvalidPassword() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
+        val context = getApplicationContext<Context>()
         val passwordInvalidText = context.getString(R.string.error_password_invalid)
 
         launchActivity<SingInActivity>()
@@ -74,17 +81,22 @@ class SignInActivityShould {
 
     @Test
     fun displaySuccessSingInWhenTypeSingInIsSuccess() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
+        val context = getApplicationContext<Context>()
         val successSingInText = context.getString(R.string.success_sign_in, ANY_NAME, ANY_USER_EMAIL)
 
+        //First Register some user
         val scenario = launchActivity<SingUpActivity>()
+
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.confirm_password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
         closeSoftKeyboard()
         onView(withId(R.id.confirm_sign_up_button)).perform(click())
+
         scenario.close()
+
+        //Then validate Sign In
         launchActivity<SingInActivity>()
 
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
@@ -97,8 +109,8 @@ class SignInActivityShould {
     }
 
     @Test
-    fun displayErrorSingInWhenTypeSingInIsFailure() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
+    fun displayErrorSingInWhenTypeSingInIsFailureAndUserAlreadyExist() {
+        val context = getApplicationContext<Context>()
         val errorSingInText = context.getString(R.string.error_sign_in)
 
         launchActivity<SingInActivity>()
