@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import mx.android.buabap.core.coroutines.CoroutinesDispatchers
 import mx.android.buabap.domain.SignUpUseCase
 import mx.android.buabap.ui.exception.AuthExceptionHandler
 import mx.android.buabap.ui.singin.UserCredentialsUi
@@ -14,8 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SingUpViewModel @Inject constructor(
-    private val authExceptionHandler: AuthExceptionHandler,
-    private val signUpUseCase: SignUpUseCase
+        private val authExceptionHandler: AuthExceptionHandler,
+        private val signUpUseCase: SignUpUseCase,
+        private val coroutinesDispatchers: CoroutinesDispatchers
 ) : ViewModel() {
 
     private val _signUpUiState = MutableStateFlow<SignUpUiState?>(null)
@@ -23,7 +25,7 @@ class SingUpViewModel @Inject constructor(
     val signUpUiState: StateFlow<SignUpUiState?>
         get() = _signUpUiState
 
-    fun singUp(userCredentialsUi: UserCredentialsUi) = viewModelScope.launch {
+    fun singUp(userCredentialsUi: UserCredentialsUi) = viewModelScope.launch(coroutinesDispatchers.io) {
         _signUpUiState.value = SignUpUiState.Loading
 
         val (areInvalidCredentials, exception) = authExceptionHandler.areInvalidSingUpCredentials(userCredentialsUi)

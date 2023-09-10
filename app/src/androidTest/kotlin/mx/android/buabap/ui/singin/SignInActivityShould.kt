@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.KeyEvent.KEYCODE_ENTER
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.core.app.launchActivity
-import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.pressKey
@@ -38,7 +38,7 @@ class SignInActivityShould {
         val emailInvalid = context.getString(R.string.error_email_invalid)
 
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_INVALID_USER_EMAIL), pressKey(KEYCODE_ENTER))
-        Espresso.closeSoftKeyboard()
+        closeSoftKeyboard()
 
         onView(withId(R.id.confirm_sign_in_button)).perform(click())
 
@@ -53,8 +53,7 @@ class SignInActivityShould {
 
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.password_edit_text)).perform(typeText(ANY_INVALID_PASSWORD), pressKey(KEYCODE_ENTER))
-        Espresso.closeSoftKeyboard()
-
+        closeSoftKeyboard()
         onView(withId(R.id.confirm_sign_in_button)).perform(click())
 
         onView(withId(R.id.password_input_layout)).check(matches(withErrorText(passwordInvalid)))

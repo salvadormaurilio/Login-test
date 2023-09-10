@@ -6,6 +6,7 @@ import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
+import mx.android.buabap.core.coroutines.CoroutinesDispatchers
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
@@ -13,6 +14,7 @@ import org.junit.runner.Description
 class TestDispatcherRule : TestWatcher() {
 
     private val dispatcher: TestDispatcher = UnconfinedTestDispatcher()
+    val coroutinesDispatchers = CoroutinesDispatchers(main = dispatcher, computation = dispatcher, io = dispatcher)
 
     override fun starting(description: Description) {
         super.starting(description)

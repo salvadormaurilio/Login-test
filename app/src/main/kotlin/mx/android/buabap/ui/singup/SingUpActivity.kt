@@ -69,7 +69,8 @@ class SingUpActivity : AppCompatActivity() {
     private fun signUpUiStateSuccess() = binding.run {
         signUpProgress.showOrHide(false)
         confirmSignUpButton.isEnabled = true
-        showAlertDialog(getString(R.string.success_sign_up)) { finish() }
+        signUpTextView.setText(R.string.success_sign_up)
+//        showAlertDialog(getString(R.string.success_sign_up)) { finish() }
     }
 
     private fun signUpUiStateError(error: Throwable) = binding.run {

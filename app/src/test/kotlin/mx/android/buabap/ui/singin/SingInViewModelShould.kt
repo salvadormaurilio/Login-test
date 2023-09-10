@@ -35,7 +35,9 @@ class SingInViewModelShould {
 
     @Before
     fun setup() {
-        singInViewModel = SingInViewModel(authExceptionHandler, signInUseCase)
+        singInViewModel = SingInViewModel(authExceptionHandler,
+                signInUseCase,
+                testDispatcherRule.coroutinesDispatchers)
     }
 
     @Test

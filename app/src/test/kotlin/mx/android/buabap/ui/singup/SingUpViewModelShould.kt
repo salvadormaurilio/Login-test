@@ -32,7 +32,8 @@ class SingUpViewModelShould {
 
     @Before
     fun setup() {
-        singUpViewModel = SingUpViewModel(authExceptionHandler, signUpUseCase)
+        singUpViewModel = SingUpViewModel(authExceptionHandler, signUpUseCase,
+                testDispatcherRule.coroutinesDispatchers)
     }
 
     @Test

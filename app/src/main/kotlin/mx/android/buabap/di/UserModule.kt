@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import mx.android.buabap.core.coroutines.CoroutinesDispatchers
 import mx.android.buabap.data.datasource.local.database.UserRoomDatabase
 import javax.inject.Singleton
 
@@ -20,4 +21,8 @@ object UserModule {
     @Provides
     @Singleton
     fun provideUserDao(userRoomDatabase: UserRoomDatabase) = userRoomDatabase.userDao()
+
+    @Provides
+    @Singleton
+    fun provideCoroutinesDispatchers() = CoroutinesDispatchers()
 }

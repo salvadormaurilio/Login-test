@@ -28,6 +28,6 @@ class AuthLocalDataSource @Inject constructor(private val userDao: UserDao) {
 
     companion object {
         private const val INVALID_ID = -1L
-        private const val DELAY_RESPONSE = 500L
+        const val DELAY_RESPONSE = 500L
     }
 }
