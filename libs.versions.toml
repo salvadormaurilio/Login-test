@@ -51,4 +51,6 @@ espresso-core = { group = "androidx.test.espresso", name = "espresso-core", vers
 core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "core-testing_v" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-v" }
 androidx-core-ktx-test = { group = "androidx.test", name = "core-ktx", version.ref = "core-ktx-test" }
+espresso-idling-resource = { group = "androidx.test.espresso", name = "espresso-idling-resource", version.ref = "espresso-core-v" }
+espresso-intents = { group = "androidx.test.espresso", name = "espresso-intents", version.ref = "espresso-core-v" }
 

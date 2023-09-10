@@ -1,6 +1,6 @@
 package mx.android.buabap.ui.singup
 
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import mx.android.buabap.core.TestDispatcherRule
@@ -15,7 +15,7 @@ import mx.android.buabap.ui.exception.AuthUiException
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
@@ -26,14 +26,17 @@ class SingUpViewModelShould {
     var testDispatcherRule = TestDispatcherRule()
 
     private val authExceptionHandler = AuthExceptionHandler()
-    private val signUpUseCase = Mockito.mock<SignUpUseCase>()
+    private val signUpUseCase = mock<SignUpUseCase>()
 
     private lateinit var singUpViewModel: SingUpViewModel
 
     @Before
     fun setup() {
-        singUpViewModel = SingUpViewModel(authExceptionHandler, signUpUseCase,
-                testDispatcherRule.coroutinesDispatchers)
+        singUpViewModel = SingUpViewModel(
+            authExceptionHandler,
+            signUpUseCase,
+            testDispatcherRule.coroutinesDispatchers
+        )
     }
 
     @Test
@@ -43,7 +46,7 @@ class SingUpViewModelShould {
 
         singUpViewModel.singUp(userCredentialsUi)
 
-        val result = singUpViewModel.signUpUiState.first()
+        val result = singUpViewModel.signUpUiState.firstOrNull()
 
         verify(signUpUseCase, never()).signUp(userCredentials)
         assertThatIsInstanceOf<SignUpUiState.Error>(result)
@@ -60,7 +63,7 @@ class SingUpViewModelShould {
 
         singUpViewModel.singUp(userCredentialsUi)
 
-        val result = singUpViewModel.signUpUiState.first()
+        val result = singUpViewModel.signUpUiState.firstOrNull()
 
         verify(signUpUseCase).signUp(userCredentials)
         assertThatIsInstanceOf<SignUpUiState.Success>(result)
@@ -76,7 +79,7 @@ class SingUpViewModelShould {
 
         singUpViewModel.singUp(userCredentialsUi)
 
-        val result = singUpViewModel.signUpUiState.first()
+        val result = singUpViewModel.signUpUiState.firstOrNull()
 
         verify(signUpUseCase).signUp(userCredentials)
         assertThatIsInstanceOf<SignUpUiState.Error>(result)

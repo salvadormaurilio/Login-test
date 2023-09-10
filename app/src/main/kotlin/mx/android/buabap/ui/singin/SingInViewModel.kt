@@ -25,7 +25,7 @@ class SingInViewModel @Inject constructor(
         get() = _signInUiState
 
     fun signIn(email: String, password: String) = viewModelScope.launch(coroutinesDispatchers.io) {
-        _signInUiState.value = SignInUiState.Loading
+        emitSignInUiState(SignInUiState.Loading)
 
         val (areInvalidCredentials, exception) = authExceptionHandler.areInvalidSingInCredentials(email, password)
         if (areInvalidCredentials) return@launch emitSignInUiState(SignInUiState.Error(exception))

@@ -1,7 +1,7 @@
 package mx.android.buabap.ui.auth
 
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
 import mx.android.buabap.core.TestDispatcherRule
@@ -29,7 +29,7 @@ class AuthViewModelShould {
         var result: AuthAction? = null
 
         authViewModel.viewModelScope.launch {
-            result = authViewModel.navigateToAuthAction.first()
+            result = authViewModel.navigateToAuthAction.firstOrNull()
         }
 
         authViewModel.navigateToSingUp()
@@ -42,7 +42,7 @@ class AuthViewModelShould {
         var result: AuthAction? = null
 
         authViewModel.viewModelScope.launch {
-            result = authViewModel.navigateToAuthAction.first()
+            result = authViewModel.navigateToAuthAction.firstOrNull()
         }
 
         authViewModel.navigateToSingIn()

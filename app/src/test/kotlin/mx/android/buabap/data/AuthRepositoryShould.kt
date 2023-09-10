@@ -1,7 +1,7 @@
 package mx.android.buabap.data
 
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.lastOrNull
 import kotlinx.coroutines.test.runTest
 import mx.android.buabap.ANY_PASSWORD
 import mx.android.buabap.ANY_USER_EMAIL
@@ -15,7 +15,7 @@ import mx.android.buabap.givenUserData
 import mx.android.buabap.givenUserEntity
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito.mock
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
@@ -38,10 +38,10 @@ class AuthRepositoryShould {
 
         whenever(authLocalDataSource.signUp(userEntity)).thenReturn(flowOf(resultTrue))
 
-        val result = authRepository.signUp(userCredentials).first()
+        val result = authRepository.signUp(userCredentials).lastOrNull()
 
         verify(authLocalDataSource).signUp(userEntity)
-        assertThatEquals(result.getOrNull(), true)
+        assertThatEquals(result?.getOrNull(), true)
     }
 
     @Test
@@ -52,10 +52,10 @@ class AuthRepositoryShould {
 
         whenever(authLocalDataSource.signUp(userEntity)).thenReturn(flowOf(resultSignUpException))
 
-        val result = authRepository.signUp(userCredentials).first()
+        val result = authRepository.signUp(userCredentials).lastOrNull()
 
         verify(authLocalDataSource).signUp(userEntity)
-        assertThatIsInstanceOf<AuthException.SignUpException>(result.exceptionOrNull())
+        assertThatIsInstanceOf<AuthException.SignUpException>(result?.exceptionOrNull())
     }
 
     @Test
@@ -66,10 +66,10 @@ class AuthRepositoryShould {
 
         whenever(authLocalDataSource.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultUserEntity))
 
-        val result = authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
+        val result = authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD).lastOrNull()
 
         verify(authLocalDataSource).signIn(ANY_USER_EMAIL, ANY_PASSWORD)
-        assertThatEquals(result.getOrNull(), userData)
+        assertThatEquals(result?.getOrNull(), userData)
     }
 
     @Test
@@ -78,9 +78,9 @@ class AuthRepositoryShould {
 
         whenever(authLocalDataSource.signIn(ANY_USER_EMAIL, ANY_PASSWORD)).thenReturn(flowOf(resultSignInException))
 
-        val result = authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD).first()
+        val result = authRepository.signIn(ANY_USER_EMAIL, ANY_PASSWORD).lastOrNull()
 
         verify(authLocalDataSource).signIn(ANY_USER_EMAIL, ANY_PASSWORD)
-        assertThatIsInstanceOf<AuthException.SignInException>(result.exceptionOrNull())
+        assertThatIsInstanceOf<AuthException.SignInException>(result?.exceptionOrNull())
     }
 }

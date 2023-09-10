@@ -65,19 +65,17 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
-    implementation("androidx.test.espresso:espresso-idling-resource:3.5.1")
-
-    implementation(libs.kotlinx.coroutines.test)
-
+    implementation(libs.espresso.idling.resource)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.core.testing)
 
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.core.testing)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.core.ktx.test)
-    androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
+    androidTestImplementation(libs.espresso.intents)
 }

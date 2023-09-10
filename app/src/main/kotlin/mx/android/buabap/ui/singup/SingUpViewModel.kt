@@ -26,7 +26,7 @@ class SingUpViewModel @Inject constructor(
         get() = _signUpUiState
 
     fun singUp(userCredentialsUi: UserCredentialsUi) = viewModelScope.launch(coroutinesDispatchers.io) {
-        _signUpUiState.value = SignUpUiState.Loading
+        emitSignInUiState(SignUpUiState.Loading)
 
         val (areInvalidCredentials, exception) = authExceptionHandler.areInvalidSingUpCredentials(userCredentialsUi)
         if (areInvalidCredentials) return@launch emitSignInUiState(SignUpUiState.Error(exception))

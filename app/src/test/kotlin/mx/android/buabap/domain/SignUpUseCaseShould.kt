@@ -1,7 +1,7 @@
 package mx.android.buabap.domain
 
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.lastOrNull
 import kotlinx.coroutines.test.runTest
 import mx.android.buabap.core.assertThatEquals
 import mx.android.buabap.core.assertThatIsInstanceOf
@@ -10,13 +10,13 @@ import mx.android.buabap.data.datasource.exception.AuthException
 import mx.android.buabap.givenUserCredentials
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 class SignUpUseCaseShould {
 
-    private val authRepository = Mockito.mock<AuthRepository>()
+    private val authRepository = mock<AuthRepository>()
 
     private lateinit var signUpUseCase: SignUpUseCase
 
@@ -32,10 +32,10 @@ class SignUpUseCaseShould {
 
         whenever(authRepository.signUp(userCredentials)).thenReturn(flowOf(resultTrue))
 
-        val result = authRepository.signUp(userCredentials).first()
+        val result = authRepository.signUp(userCredentials).lastOrNull()
 
         verify(authRepository).signUp(userCredentials)
-        assertThatEquals(result.getOrNull(), true)
+        assertThatEquals(result?.getOrNull(), true)
     }
 
     @Test
@@ -45,9 +45,9 @@ class SignUpUseCaseShould {
 
         whenever(authRepository.signUp(userCredentials)).thenReturn(flowOf(resultSignUpException))
 
-        val result = authRepository.signUp(userCredentials).first()
+        val result = authRepository.signUp(userCredentials).lastOrNull()
 
         verify(authRepository).signUp(userCredentials)
-        assertThatIsInstanceOf<AuthException.SignUpException>(result.exceptionOrNull())
+        assertThatIsInstanceOf<AuthException.SignUpException>(result?.exceptionOrNull())
     }
 }
