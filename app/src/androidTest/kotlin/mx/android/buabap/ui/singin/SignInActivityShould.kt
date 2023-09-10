@@ -24,7 +24,7 @@ import mx.android.buabap.R
 import mx.android.buabap.core.CountingIdlingResourceRule
 import mx.android.buabap.core.matcher.LoginErrorTextMatchers.withErrorText
 import mx.android.buabap.data.datasource.local.database.DATABASE_USER_NAME
-import mx.android.buabap.ui.singup.SingUpActivity
+import mx.android.buabap.ui.auth.AuthActivity
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -41,7 +41,7 @@ class SignInActivityShould {
 
     @Test
     fun displayViewsWhenSingUpActivityStart() {
-        launchActivity<SingInActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.sign_in_text_view)).check(matches(isDisplayed()))
         onView(withId(R.id.email_edit_text)).check(matches(isDisplayed()))
@@ -54,7 +54,7 @@ class SignInActivityShould {
         val context = getApplicationContext<Context>()
         val emailInvalidText = context.getString(R.string.error_email_invalid)
 
-        launchActivity<SingInActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_INVALID_USER_EMAIL), pressKey(KEYCODE_ENTER))
         closeSoftKeyboard()
@@ -69,7 +69,7 @@ class SignInActivityShould {
         val context = getApplicationContext<Context>()
         val passwordInvalidText = context.getString(R.string.error_password_invalid)
 
-        launchActivity<SingInActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.password_edit_text)).perform(typeText(ANY_INVALID_PASSWORD), pressKey(KEYCODE_ENTER))
@@ -85,7 +85,7 @@ class SignInActivityShould {
         val successSingInText = context.getString(R.string.success_sign_in, ANY_NAME, ANY_USER_EMAIL)
 
         //First Register some user
-        val scenario = launchActivity<SingUpActivity>()
+        val scenario = launchActivity<AuthActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
@@ -97,7 +97,7 @@ class SignInActivityShould {
         scenario.close()
 
         //Then validate Sign In
-        launchActivity<SingInActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
@@ -113,7 +113,7 @@ class SignInActivityShould {
         val context = getApplicationContext<Context>()
         val errorSingInText = context.getString(R.string.error_sign_in)
 
-        launchActivity<SingInActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.password_edit_text)).perform(typeText(ANY_OTHER_PASSWORD), pressKey(KEYCODE_ENTER))

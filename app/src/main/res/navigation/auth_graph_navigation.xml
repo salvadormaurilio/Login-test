@@ -6,7 +6,7 @@
 
     <activity
         android:id="@+id/auth_Activity"
-        android:name="mx.android.buabap.ui.auth.AuthActivity2"
+        android:name="mx.android.buabap.ui.auth.AuthActivity"
         android:label="AuthInActivity" />
 
     <fragment

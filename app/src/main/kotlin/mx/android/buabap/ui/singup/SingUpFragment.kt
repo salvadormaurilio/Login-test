@@ -20,25 +20,20 @@ import mx.android.buabap.core.ui.showError
 import mx.android.buabap.core.ui.showOrHide
 import mx.android.buabap.core.ui.snackbar
 import mx.android.buabap.data.datasource.exception.AuthException
-import mx.android.buabap.databinding.ActivitySignUpBinding
+import mx.android.buabap.databinding.FragmentSignUpBinding
 import mx.android.buabap.ui.exception.AuthUiException
 import mx.android.buabap.ui.singin.UserCredentialsUi
 
 @AndroidEntryPoint
 class SingUpFragment : Fragment() {
 
-    private var binding: ActivitySignUpBinding? = null
+    private lateinit var binding: FragmentSignUpBinding
 
     private val singUpViewModel by viewModels<SingUpViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
-        return binding?.root
-    }
-
-    override fun onDestroyView() {
-        binding = null
-        super.onDestroyView()
+        binding = FragmentSignUpBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +42,7 @@ class SingUpFragment : Fragment() {
         lifecycleScope.launch { collectSignUpUiState() }
     }
 
-    private fun initUi() = binding?.run {
+    private fun initUi() = binding.run {
         confirmSignUpButton.setOnClickListener {
             CountingIdlingResourceSingleton.increment()
             singUpViewModel.singUp(buildUserCredentialsUi())
@@ -55,10 +50,10 @@ class SingUpFragment : Fragment() {
     }
 
     private fun buildUserCredentialsUi() = UserCredentialsUi(
-        name = binding?.nameEditText?.getString().orEmpty(),
-        email = binding?.emailEditText?.getString().orEmpty(),
-        password = binding?.passwordEditText?.getString().orEmpty(),
-        confirmPassword = binding?.confirmPasswordEditText?.getString().orEmpty()
+        name = binding.nameEditText.getString(),
+        email = binding.emailEditText.getString(),
+        password = binding.passwordEditText.getString(),
+        confirmPassword = binding.confirmPasswordEditText.getString()
     )
 
     private suspend fun collectSignUpUiState() {
@@ -75,19 +70,19 @@ class SingUpFragment : Fragment() {
         }
     }
 
-    private fun signUpUiStateLoading() = binding?.run {
+    private fun signUpUiStateLoading() = binding.run {
         signUpProgress.showOrHide(true)
         confirmSignUpButton.isEnabled = false
     }
 
-    private fun signUpUiStateSuccess() = binding?.run {
+    private fun signUpUiStateSuccess() = binding.run {
         signUpProgress.showOrHide(false)
         confirmSignUpButton.isEnabled = true
         requireContext().showAlertDialog(getString(R.string.success_sign_up)) { findNavController().popBackStack() }
         CountingIdlingResourceSingleton.decrement()
     }
 
-    private fun signUpUiStateError(error: Throwable) = binding?.run {
+    private fun signUpUiStateError(error: Throwable) = binding.run {
         signUpProgress.showOrHide(false)
         confirmSignUpButton.isEnabled = true
         when (error) {

@@ -80,5 +80,4 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.core.ktx.test)
-    androidTestImplementation(libs.espresso.intents)
 }

@@ -25,7 +25,7 @@ import mx.android.buabap.R
 import mx.android.buabap.core.CountingIdlingResourceRule
 import mx.android.buabap.core.matcher.LoginErrorTextMatchers.withErrorText
 import mx.android.buabap.data.datasource.local.database.DATABASE_USER_NAME
-import mx.android.buabap.ui.singup.SingUpActivity
+import mx.android.buabap.ui.auth.AuthActivity
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -42,7 +42,7 @@ class SignUpActivityShould {
 
     @Test
     fun displayViewsWhenSingUpActivityStart() {
-        launchActivity<SingUpActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.sign_up_text_view)).check(matches(isDisplayed()))
         onView(withId(R.id.name_edit_text)).check(matches(isDisplayed()))
@@ -57,7 +57,7 @@ class SignUpActivityShould {
         val context = getApplicationContext<Context>()
         val nameInvalidText = context.getString(R.string.error_name_invalid)
 
-        launchActivity<SingUpActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_INVALID_NAME), pressKey(KEYCODE_ENTER))
         closeSoftKeyboard()
@@ -71,7 +71,7 @@ class SignUpActivityShould {
         val context = getApplicationContext<Context>()
         val emailInvalidText = context.getString(R.string.error_email_invalid)
 
-        launchActivity<SingUpActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_INVALID_USER_EMAIL), pressKey(KEYCODE_ENTER))
@@ -86,7 +86,7 @@ class SignUpActivityShould {
         val context = getApplicationContext<Context>()
         val passwordInvalidText = context.getString(R.string.error_password_invalid)
 
-        launchActivity<SingUpActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
@@ -103,7 +103,7 @@ class SignUpActivityShould {
         val context = getApplicationContext<Context>()
         val passwordInvalidText = context.getString(R.string.error_password_invalid)
 
-        launchActivity<SingUpActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
@@ -120,7 +120,7 @@ class SignUpActivityShould {
         val context = getApplicationContext<Context>()
         val passwordDifferentText = context.getString(R.string.error_password_different)
 
-        launchActivity<SingUpActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
@@ -137,7 +137,7 @@ class SignUpActivityShould {
         val context = getApplicationContext<Context>()
         val successSingUpText = context.getString(R.string.success_sign_up)
 
-        launchActivity<SingUpActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
@@ -156,7 +156,7 @@ class SignUpActivityShould {
         val errorUserAlreadyExistText = context.getString(R.string.error_user_already_exit)
 
         //First Register some user
-        val scenario = launchActivity<SingUpActivity>()
+        val scenario = launchActivity<AuthActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
@@ -168,7 +168,7 @@ class SignUpActivityShould {
         scenario.close()
 
         //Then validate Second user registration
-        launchActivity<SingUpActivity>()
+        launchActivity<AuthActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))

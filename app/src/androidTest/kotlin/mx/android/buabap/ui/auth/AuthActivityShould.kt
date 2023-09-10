@@ -10,8 +10,6 @@ import androidx.test.espresso.intent.rule.IntentsRule
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import mx.android.buabap.R
-import mx.android.buabap.ui.singin.SingInActivity
-import mx.android.buabap.ui.singup.SingUpActivity
 import org.junit.Rule
 import org.junit.Test
 

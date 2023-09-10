@@ -12,18 +12,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import mx.android.buabap.R
-import mx.android.buabap.databinding.ActivityAuthBinding
+import mx.android.buabap.databinding.FragmentAuthBinding
 import mx.android.buabap.ui.auth.AuthAction.SignIn
 import mx.android.buabap.ui.auth.AuthAction.SignUp
 
 class AuthFragment : Fragment() {
 
-    private lateinit var binding: ActivityAuthBinding
+    private lateinit var binding: FragmentAuthBinding
 
     private val authViewModel by viewModels<AuthViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = ActivityAuthBinding.inflate(layoutInflater)
+        binding = FragmentAuthBinding.inflate(layoutInflater)
         return binding.root
     }
 

@@ -20,19 +20,19 @@ import mx.android.buabap.core.ui.showError
 import mx.android.buabap.core.ui.showOrHide
 import mx.android.buabap.core.ui.snackbar
 import mx.android.buabap.data.datasource.exception.AuthException
-import mx.android.buabap.databinding.ActivitySignInBinding
+import mx.android.buabap.databinding.FragmentSignInBinding
 import mx.android.buabap.domain.UserData
 import mx.android.buabap.ui.exception.AuthUiException
 
 @AndroidEntryPoint
 class SingInFragment : Fragment() {
 
-    private lateinit var binding: ActivitySignInBinding
+    private lateinit var binding: FragmentSignInBinding
 
     private val singInViewModel by viewModels<SingInViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = ActivitySignInBinding.inflate(layoutInflater)
+        binding = FragmentSignInBinding.inflate(layoutInflater)
         return binding.root
     }
 
