@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/authFragment"
+    android:id="@+id/authNavigation">
+
+    <activity
+        android:id="@+id/auth_Activity"
+        android:name="mx.android.buabap.ui.auth.AuthActivity2"
+        android:label="AuthInActivity" />
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="mx.android.buabap.ui.auth.AuthFragment"
+        android:label="AuthFragment">
+        <action
+            android:id="@+id/action_authFragment_to_singInFragment"
+            app:destination="@id/singInFragment" />
+        <action
+            android:id="@+id/action_authFragment_to_singUpFragment"
+            app:destination="@id/singUpFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/singInFragment"
+        android:name="mx.android.buabap.ui.singin.SingInFragment"
+        android:label="SingInFragment" />
+    <fragment
+        android:id="@+id/singUpFragment"
+        android:name="mx.android.buabap.ui.singup.SingUpFragment"
+        android:label="SingUpFragment" />
+
+</navigation>

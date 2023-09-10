@@ -1,31 +1,34 @@
 package mx.android.buabap.ui.auth
 
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle.State.CREATED
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
-import mx.android.buabap.core.ui.intentTo
+import mx.android.buabap.R
 import mx.android.buabap.databinding.ActivityAuthBinding
 import mx.android.buabap.ui.auth.AuthAction.SignIn
 import mx.android.buabap.ui.auth.AuthAction.SignUp
-import mx.android.buabap.ui.singin.SingInActivity
-import mx.android.buabap.ui.singup.SingUpActivity
 
-@AndroidEntryPoint
-class AuthActivity : AppCompatActivity() {
+class AuthFragment : Fragment() {
 
     private lateinit var binding: ActivityAuthBinding
 
     private val authViewModel by viewModels<AuthViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = ActivityAuthBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initUi()
         lifecycleScope.launch { collectNavigationToAuthAction() }
     }
@@ -43,12 +46,26 @@ class AuthActivity : AppCompatActivity() {
 
     private fun openAuthAction(authAction: AuthAction?) = authAction?.run {
         when (this) {
-            is SignUp -> openSingUpActivity()
-            is SignIn -> openSingInActivity()
+            is SignUp -> openSingUpFragment()
+            is SignIn -> openSingInFragment()
         }
     }
 
-    private fun openSingUpActivity() = intentTo<SingUpActivity>().run { startActivity(this) }
+    private fun openSingUpFragment() {
+        try {
+            findNavController()
+                .navigate(R.id.action_authFragment_to_singUpFragment)
+        } catch (e: Exception) {
+            // No need to do anything.
+        }
+    }
 
-    private fun openSingInActivity() = intentTo<SingInActivity>().run { startActivity(this) }
+    private fun openSingInFragment() {
+        try {
+            findNavController()
+                .navigate(R.id.action_authFragment_to_singInFragment)
+        } catch (e: Exception) {
+            // No need to do anything.
+        }
+    }
 }

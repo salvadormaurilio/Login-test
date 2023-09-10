@@ -10,6 +10,8 @@ material-v = "1.9.0"
 constraint-layout-v = "2.1.4"
 room-v = "2.5.2"
 
+
+
 kotlinx-coroutines-v = "1.7.3"
 
 junit-v = "4.13.2"
@@ -53,4 +55,6 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 androidx-core-ktx-test = { group = "androidx.test", name = "core-ktx", version.ref = "core-ktx-test" }
 espresso-idling-resource = { group = "androidx.test.espresso", name = "espresso-idling-resource", version.ref = "espresso-core-v" }
 espresso-intents = { group = "androidx.test.espresso", name = "espresso-intents", version.ref = "espresso-core-v" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version = "2.7.2" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version = "2.7.2" }
 
