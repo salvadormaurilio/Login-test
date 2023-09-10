@@ -2,6 +2,7 @@ package mx.android.buabap.data.datasource.local.database
 
 import kotlinx.coroutines.test.runTest
 import mx.android.buabap.ANY_AUTO_ID
+import mx.android.buabap.ANY_DELETED_ID
 import mx.android.buabap.ANY_INVALID_PASSWORD
 import mx.android.buabap.ANY_PASSWORD
 import mx.android.buabap.ANY_USER_EMAIL
@@ -70,5 +71,16 @@ class UserDaoShould {
         val result = userDao.exist(ANY_USER_EMAIL)
 
         assertThatEquals(result, false)
+    }
+
+    @Test
+    fun deleteUserFromUserDaoWhenUserAlreadyExist() = runTest {
+        val userEntity = givenUserEntity()
+
+        userDao.insert(userEntity)
+
+        val row = userDao.delete()
+
+        assertThatEquals(row, ANY_DELETED_ID)
     }
 }

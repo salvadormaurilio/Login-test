@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import mx.android.buabap.R
+import mx.android.buabap.core.test.CountingIdlingResourceSingleton
 import mx.android.buabap.core.ui.getString
 import mx.android.buabap.core.ui.showAlertDialog
 import mx.android.buabap.core.ui.showError
@@ -34,8 +35,10 @@ class SingUpActivity : AppCompatActivity() {
         lifecycleScope.launch { collectSignUpUiState() }
     }
 
+
     private fun initUi() = binding.run {
         confirmSignUpButton.setOnClickListener {
+            CountingIdlingResourceSingleton.increment()
             singUpViewModel.singUp(buildUserCredentialsUi())
         }
     }
@@ -69,8 +72,8 @@ class SingUpActivity : AppCompatActivity() {
     private fun signUpUiStateSuccess() = binding.run {
         signUpProgress.showOrHide(false)
         confirmSignUpButton.isEnabled = true
-        signUpTextView.setText(R.string.success_sign_up)
-//        showAlertDialog(getString(R.string.success_sign_up)) { finish() }
+        showAlertDialog(getString(R.string.success_sign_up)) { finish() }
+        CountingIdlingResourceSingleton.decrement()
     }
 
     private fun signUpUiStateError(error: Throwable) = binding.run {
@@ -86,5 +89,6 @@ class SingUpActivity : AppCompatActivity() {
             is AuthUiException.DifferentPasswordException -> confirmPasswordInputLayout.error = getString(R.string.error_password_different)
             else -> root.snackbar(error.message).showError()
         }
+        CountingIdlingResourceSingleton.decrement()
     }
 }

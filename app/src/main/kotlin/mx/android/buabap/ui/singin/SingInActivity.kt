@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import mx.android.buabap.R
+import mx.android.buabap.core.test.CountingIdlingResourceSingleton
 import mx.android.buabap.core.ui.getString
 import mx.android.buabap.core.ui.showAlertDialog
 import mx.android.buabap.core.ui.showError
@@ -36,6 +37,7 @@ class SingInActivity : AppCompatActivity() {
 
     private fun initUi() = binding.run {
         confirmSignInButton.setOnClickListener {
+            CountingIdlingResourceSingleton.increment()
             singInViewModel.signIn(email = emailEditText.getString(), password = passwordEditText.getString())
         }
     }
@@ -63,6 +65,7 @@ class SingInActivity : AppCompatActivity() {
         signInProgress.showOrHide(false)
         confirmSignInButton.isEnabled = true
         showAlertDialog(getString(R.string.success_sign_in, userData.name, userData.email)) { finish() }
+        CountingIdlingResourceSingleton.decrement()
     }
 
     private fun signUpInStateError(error: Throwable) = binding.run {
@@ -74,5 +77,6 @@ class SingInActivity : AppCompatActivity() {
             is AuthUiException.PasswordException -> passwordInputLayout.error = getString(R.string.error_password_invalid)
             else -> root.snackbar(error.message).showError()
         }
+        CountingIdlingResourceSingleton.decrement()
     }
 }

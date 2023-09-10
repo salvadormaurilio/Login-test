@@ -67,6 +67,9 @@ dependencies {
 
     implementation("androidx.test.espresso:espresso-idling-resource:3.5.1")
 
+    implementation(libs.kotlinx.coroutines.test)
+
+
     testImplementation(libs.junit)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.kotlinx.coroutines.test)

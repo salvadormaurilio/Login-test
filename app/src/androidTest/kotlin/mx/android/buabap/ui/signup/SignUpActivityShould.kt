@@ -10,9 +10,10 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.pressKey
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import mx.android.buabap.ANY_INVALID_NAME
 import mx.android.buabap.ANY_INVALID_PASSWORD
 import mx.android.buabap.ANY_INVALID_USER_EMAIL
@@ -21,18 +22,16 @@ import mx.android.buabap.ANY_OTHER_PASSWORD
 import mx.android.buabap.ANY_PASSWORD
 import mx.android.buabap.ANY_USER_EMAIL
 import mx.android.buabap.R
-import mx.android.buabap.core.TestDispatcherRule
+import mx.android.buabap.core.CountingIdlingResourceRule
 import mx.android.buabap.core.matcher.LoginErrorTextMatchers.withErrorText
 import mx.android.buabap.ui.singup.SingUpActivity
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class SignUpActivityShould {
 
     @get:Rule
-    var testDispatcherRule = TestDispatcherRule()
+    val countingIdlingResourceRule = CountingIdlingResourceRule()
 
     @Test
     fun displayViewsWhenSingUpActivityStart() {
@@ -48,36 +47,39 @@ class SignUpActivityShould {
 
     @Test
     fun displayErrorNameInvalidWhenTypeInvalidName() {
-        launchActivity<SingUpActivity>()
         val context = getApplicationContext<Context>()
-        val nameInvalid = context.getString(R.string.error_name_invalid)
+        val nameInvalidText = context.getString(R.string.error_name_invalid)
+
+        launchActivity<SingUpActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_INVALID_NAME), pressKey(KEYCODE_ENTER))
         closeSoftKeyboard()
         onView(withId(R.id.confirm_sign_up_button)).perform(click())
 
-        onView(withId(R.id.name_input_layout)).check(matches(withErrorText(nameInvalid)))
+        onView(withId(R.id.name_input_layout)).check(matches(withErrorText(nameInvalidText)))
     }
 
     @Test
     fun displayErrorEmailInvalidWhenTypeInvalidEmail() {
-        launchActivity<SingUpActivity>()
         val context = getApplicationContext<Context>()
-        val emailInvalid = context.getString(R.string.error_email_invalid)
+        val emailInvalidText = context.getString(R.string.error_email_invalid)
+
+        launchActivity<SingUpActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_INVALID_USER_EMAIL), pressKey(KEYCODE_ENTER))
         closeSoftKeyboard()
         onView(withId(R.id.confirm_sign_up_button)).perform(click())
 
-        onView(withId(R.id.email_input_layout)).check(matches(withErrorText(emailInvalid)))
+        onView(withId(R.id.email_input_layout)).check(matches(withErrorText(emailInvalidText)))
     }
 
     @Test
     fun displayErrorPasswordInvalidWhenTypeInvalidPassword() {
-        launchActivity<SingUpActivity>()
         val context = getApplicationContext<Context>()
-        val passwordInvalid = context.getString(R.string.error_password_invalid)
+        val passwordInvalidText = context.getString(R.string.error_password_invalid)
+
+        launchActivity<SingUpActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
@@ -86,14 +88,15 @@ class SignUpActivityShould {
 
         onView(withId(R.id.confirm_sign_up_button)).perform(click())
 
-        onView(withId(R.id.password_input_layout)).check(matches(withErrorText(passwordInvalid)))
+        onView(withId(R.id.password_input_layout)).check(matches(withErrorText(passwordInvalidText)))
     }
 
     @Test
     fun displayErrorConfirmPasswordInvalidWhenTypeInvalidPassword() {
-        launchActivity<SingUpActivity>()
         val context = getApplicationContext<Context>()
-        val passwordInvalid = context.getString(R.string.error_password_invalid)
+        val passwordInvalidText = context.getString(R.string.error_password_invalid)
+
+        launchActivity<SingUpActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
@@ -102,14 +105,15 @@ class SignUpActivityShould {
         closeSoftKeyboard()
         onView(withId(R.id.confirm_sign_up_button)).perform(click())
 
-        onView(withId(R.id.confirm_password_input_layout)).check(matches(withErrorText(passwordInvalid)))
+        onView(withId(R.id.confirm_password_input_layout)).check(matches(withErrorText(passwordInvalidText)))
     }
 
     @Test
     fun displayErrorDifferentPasswordInvalidWhenTypeInvalidPassword() {
-        launchActivity<SingUpActivity>()
         val context = getApplicationContext<Context>()
-        val passwordDifferent = context.getString(R.string.error_password_different)
+        val passwordDifferentText = context.getString(R.string.error_password_different)
+
+        launchActivity<SingUpActivity>()
 
         onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
         onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
@@ -118,23 +122,24 @@ class SignUpActivityShould {
         closeSoftKeyboard()
         onView(withId(R.id.confirm_sign_up_button)).perform(click())
 
-        onView(withId(R.id.confirm_password_input_layout)).check(matches(withErrorText(passwordDifferent)))
+        onView(withId(R.id.confirm_password_input_layout)).check(matches(withErrorText(passwordDifferentText)))
     }
 
-//    @Test
-//    fun test1() = runTest{
-//        launchActivity<SingUpActivity>()
-//        val context = getApplicationContext<Context>()
-//        val test = context.getString(R.string.success_sign_up)
-//
-//        onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
-//        onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
-//        onView(withId(R.id.password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
-//        onView(withId(R.id.confirm_password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
-//        closeSoftKeyboard()
-//        onView(withId(R.id.confirm_sign_up_button)).perform(click())
-//        SystemClock.sleep(DELAY_RESPONSE)
-//
-//        onView(withId(R.id.sign_up_text_view)).check(matches(withText(test)))
-//    }
+    @Test
+    fun displaySuccessSingUpWhenTypeSingUpIsSuccess() {
+        val context = getApplicationContext<Context>()
+        val successSingUpText = context.getString(R.string.success_sign_up)
+
+        launchActivity<SingUpActivity>()
+
+        onView(withId(R.id.name_edit_text)).perform(typeText(ANY_NAME), pressKey(KEYCODE_ENTER))
+        onView(withId(R.id.email_edit_text)).perform(typeText(ANY_USER_EMAIL), pressKey(KEYCODE_ENTER))
+        onView(withId(R.id.password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
+        onView(withId(R.id.confirm_password_edit_text)).perform(typeText(ANY_PASSWORD), pressKey(KEYCODE_ENTER))
+        closeSoftKeyboard()
+
+        onView(withId(R.id.confirm_sign_up_button)).perform(click())
+
+        onView(withText(successSingUpText)).inRoot(isDialog()).check(matches(isDisplayed()));
+    }
 }
