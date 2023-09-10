@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import mx.android.buabap.R
+import mx.android.buabap.core.ui.safeNavigate
 import mx.android.buabap.databinding.FragmentAuthBinding
 import mx.android.buabap.ui.auth.AuthAction.SignIn
 import mx.android.buabap.ui.auth.AuthAction.SignUp
@@ -52,20 +53,10 @@ class AuthFragment : Fragment() {
     }
 
     private fun openSingUpFragment() {
-        try {
-            findNavController()
-                .navigate(R.id.action_authFragment_to_singUpFragment)
-        } catch (e: Exception) {
-            // No need to do anything.
-        }
+        findNavController().safeNavigate(R.id.action_authFragment_to_singUpFragment)
     }
 
     private fun openSingInFragment() {
-        try {
-            findNavController()
-                .navigate(R.id.action_authFragment_to_singInFragment)
-        } catch (e: Exception) {
-            // No need to do anything.
-        }
+        findNavController().safeNavigate(R.id.action_authFragment_to_singInFragment)
     }
 }
