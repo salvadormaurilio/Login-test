@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import mx.android.buabap.R
 import mx.android.buabap.core.test.CountingIdlingResourceSingleton
+import mx.android.buabap.core.ui.cleanErrorWatcher
 import mx.android.buabap.core.ui.getString
 import mx.android.buabap.core.ui.showAlertDialog
 import mx.android.buabap.core.ui.showError
@@ -39,6 +40,7 @@ class SingInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
+        initInputText()
         lifecycleScope.launch { collectSignInUiState() }
     }
 
@@ -47,6 +49,11 @@ class SingInFragment : Fragment() {
             CountingIdlingResourceSingleton.increment()
             singInViewModel.signIn(email = emailEditText.getString(), password = passwordEditText.getString())
         }
+    }
+
+    private fun initInputText() {
+        binding.emailInputLayout.cleanErrorWatcher()
+        binding.passwordInputLayout.cleanErrorWatcher()
     }
 
     private suspend fun collectSignInUiState() = lifecycleScope.launch {

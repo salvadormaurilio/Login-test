@@ -2,6 +2,7 @@ package mx.android.buabap.core.ui
 
 import java.util.regex.Pattern
 
+fun String.Companion.empty() = ""
 
 fun String.isValidEmail() = Pattern.compile(EMAIL_PATTERN).matcher(this).matches()
 
