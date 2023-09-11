@@ -3,13 +3,15 @@ Example of Sing Up and Sign In local
 
 ## :scroll: Motivation and Context
 
+This project simulates the Sign Up and Sign in of a user, things to consider: 
+- All information is saved locally with Sqlite. 
+- For Sign Up and Sing in, there is validation of the fields, like email, passord, etc. 
+- There is also a validation if a user already exists in the local database.
+- In the same way, there is a validation in the Sign In if a user does not yet exist.
 
-## :paperclip: 
 
 
-## :art: UI Test
-
-Technologies and topics used
+## :paperclip:  Technologies and topics used
 
 ### Technologies 
 - Kotlin
@@ -35,6 +37,7 @@ Technologies and topics used
 - Repository pattern
 - Dependency injection
 
+## :art: UI Test
 
 ### Auth
 
