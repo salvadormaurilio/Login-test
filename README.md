@@ -41,20 +41,19 @@ This project simulates the Sign Up and Sign in of a user, things to consider:
 
 ### Auth
 
-<img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/43ffd9bb-e299-4631-8e9f-c43ec8cb2628" width="320">
+<img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/9dc8ed4f-8d3a-4bbc-bf25-9c71e569cf4a" width="320">
 
 ### Sign Up
 
 Sign Up Success | Some Fiel is Wrong | User al readey Exist
 --- | ---  | --- 
-<img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/71c255a7-aa8b-4151-b692-cc921c3785d4" width="320"> | <img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/3292f148-c6dd-4745-9a7c-53c689b8ad4a" width="320"> | <img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/ae4ecbaa-9b17-48f2-a065-180eec69a7cf" width="320">
+<img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/8b82777c-f4ca-467e-bf55-84f72a9a2703" width="320"> | <img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/4531d148-e2f3-4d2f-87d0-3116322c68d8" width="320"> | <img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/b31d75d2-8d84-453b-b08b-c4ff758d077b" width="320">
 
 ### Sign In
 
 Sign In Success | Some Fiel is Wrong | User Invalid
 --- | ---  | --- 
-<img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/f15e9f3e-ab73-4ed1-a526-1e7346b1f9b0" width="320"> | <img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/400ffd0e-0691-4b27-a1fa-d455642651ce" width="320"> | <img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/e2dc25c2-b10b-44e2-897e-b4308179b23b" width="320">
-
+<img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/330d0978-7797-48b3-85a7-2f135fdaa9e2" width="320"> | <img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/f3a1a7c5-c0f3-4a05-a3fb-1412535968da" width="320"> | <img src="https://github.com/salvadormaurilio/Login-test/assets/4513422/77944d9d-22cf-404d-92d0-d4bc43bbb54a" width="320">
 
 ## :green_heart: How did you test it?
 
